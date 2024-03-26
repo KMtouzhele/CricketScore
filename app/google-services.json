@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "789231086706",
+    "project_id": "kit721-e13e3",
+    "storage_bucket": "kit721-e13e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789231086706:android:55147d9cd347caa23de6eb",
+        "android_client_info": {
+          "package_name": "au.edu.utas.kaimol.cricketscore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxEiNXQifJV762FSaWMwfmSyOGhLSwi5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789231086706:android:3a5002e5e58d111b3de6eb",
+        "android_client_info": {
+          "package_name": "au.edu.utas.kaimol.cricketscoringapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxEiNXQifJV762FSaWMwfmSyOGhLSwi5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789231086706:android:e683c0f1379f6dfa3de6eb",
+        "android_client_info": {
+          "package_name": "au.edu.utas.kit305.tutorial05"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxEiNXQifJV762FSaWMwfmSyOGhLSwi5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

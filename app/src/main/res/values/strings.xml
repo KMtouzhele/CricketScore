@@ -1,3 +1,28 @@
 <resources>
-    <string name="app_name">CricketScore</string>
+    <string name="app_name">CricketScoringApp</string>
+    <string name="welcome">Welcome to Cricket Scoring</string>
+    <string name="start">Start</string>
+    <string name="create_a_new_match">Create a New Match</string>
+    <string name="match_history">Match History</string>
+    <string name="enter_player_s_name">Enter player\'s name</string>
+    <string name="avatar">Avatar</string>
+    <string name="batting_team">Batting Team</string>
+    <string name="_1">1.</string>
+    <string name="batting_team_name">Batting Team Name</string>
+    <string name="_2">2.</string>
+    <string name="camera_icon1">camera_icon1</string>
+    <string name="camera_icon2">camera_icon2</string>
+    <string name="_3">3.</string>
+    <string name="camera_icon3">camera_icon3</string>
+    <string name="_4">4.</string>
+    <string name="_5">5.</string>
+    <string name="camera_icon4">camera_icon4</string>
+    <string name="camera_icon5">camera_icon5</string>
+    <string name="next">Next</string>
+    <string name="cancel">Cancel</string>
+    <string name="team_setup_toast">Please ensure all the names are filled in.</string>
+    <string name="bowling_team_name">Bowling Team Name</string>
+    <string name="bowling_team">Bowling Team</string>
+    <string name="match_start">Match Start</string>
+    <string name="back">Back</string>
 </resources>
