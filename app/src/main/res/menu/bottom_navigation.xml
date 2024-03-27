@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navScoreboard"
+        android:icon="@drawable/baseline_scoreboard_24"
+        android:title="Scoreboard" />
+    <item
+        android:id="@+id/navSummary"
+        android:icon="@drawable/baseline_assessment_24"
+        android:title="Summary" />
+    <item
+        android:id="@+id/navIndividual"
+        android:icon="@drawable/baseline_account_box_24"
+        android:title="Individual" />
+    <item
+        android:id="@+id/navSettings"
+        android:icon="@drawable/baseline_build_24"
+        android:title="Settings" />
+</menu>

@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:textAlignment="gravity"
+    tools:context=".view.fragments.ScoreboardFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/fieldBatter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/headerBatter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/txtBatter"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/batter"
+                        android:textAlignment="gravity"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtRuns"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/runs" />
+
+                    <TextView
+                        android:id="@+id/txtBallsFaced"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/ballsfaced" />
+
+                    <TextView
+                        android:id="@+id/txt4s"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/_4s" />
+
+                    <TextView
+                        android:id="@+id/txt6s"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/_6s" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/scoreBatter1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/scoreBatter2"
+                    app:layout_constraintStart_toEndOf="@+id/headerBatter"
+                    app:layout_constraintTop_toTopOf="@+id/headerBatter">
+
+                    <Spinner
+                        android:id="@+id/spinnerBatter1"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:spinnerMode="dropdown"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/runsBatter1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/initNumber"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/ballsFacedBatter1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/initNumber"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/fourSBatter1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/initNumber"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/sixSBatter1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/initNumber"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/scoreBatter2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/scoreBatter1"
+                    app:layout_constraintTop_toTopOf="@+id/scoreBatter1">
+
+                    <Spinner
+                        android:id="@+id/spinnerBatter2"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/runsBatter2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/initNumber"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/ballsFacedBatter2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/initNumber"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/fourSBatter2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/initNumber"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/sixSBatter2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/initNumber"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/dividerScore"
+            android:layout_width="391dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fieldBatter" />
+
+        <LinearLayout
+            android:id="@+id/fieldBowler"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dividerScore">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/headerBowler"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="100dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/txtBowler"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:gravity="center_vertical"
+                        android:text="Bowler"
+                        android:textAlignment="gravity"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtRunsLost"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:gravity="center_vertical"
+                        android:text="RunsLost" />
+
+                    <TextView
+                        android:id="@+id/txtBallsDelivered"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:gravity="center_vertical"
+                        android:text="BallsDelivered" />
+
+                    <TextView
+                        android:id="@+id/txtTotalWicket"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:gravity="center_vertical"
+                        android:text="TotalWicket" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/scoreBowler"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/headerBowler"
+                    tools:layout_editor_absoluteY="0dp">
+
+                    <Spinner
+                        android:id="@+id/spinnerBowler"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/runsLostBowler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/initNumber"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/ballsDeliveredBowler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/initNumber"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/totalWicketBowler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/initNumber"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/scorePad"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/btnConfirm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fieldBowler">
+
+            <HorizontalScrollView
+                android:id="@+id/scrollWicket"
+                android:layout_width="match_parent"
+                android:layout_height="48dp">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipWicket"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipBowled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bowled" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCaught"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Caught" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCAndB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CAndB" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipLBW"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="LBW" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipHitWicket"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hit Wicket" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipRunOut"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Run Out" />
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+            <HorizontalScrollView
+                android:id="@+id/scrollExtras"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipExtras"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnConfirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:text="Confirm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

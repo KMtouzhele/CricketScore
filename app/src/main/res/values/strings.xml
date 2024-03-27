@@ -25,4 +25,16 @@
     <string name="bowling_team">Bowling Team</string>
     <string name="match_start">Match Start</string>
     <string name="back">Back</string>
+    <string name="title_activity_scoring">Scoring</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="batter">Batter</string>
+    <string name="runs">Runs</string>
+    <string name="ballsfaced">BallsFaced</string>
+    <string name="_4s">4s</string>
+    <string name="_6s">6s</string>
+    <string name="initNumber">-</string>
 </resources>

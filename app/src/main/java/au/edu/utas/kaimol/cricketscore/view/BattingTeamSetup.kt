@@ -6,11 +6,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import au.edu.utas.kaimol.cricketscore.adapter.PlayerContainerAdapter
-import au.edu.utas.kaimol.cricketscore.controller.SetupController
 import au.edu.utas.kaimol.cricketscore.controller.TeamSetupController
 import au.edu.utas.kaimol.cricketscore.databinding.ActivityBattingTeamSetupBinding
 import au.edu.utas.kaimol.cricketscore.entity.Team
 import au.edu.utas.kaimol.cricketscore.entity.TeamType
+import au.edu.utas.kaimol.cricketscore.validator.EmptySetupValidator
 
 private val playerIndexes = mutableListOf(1, 2, 3, 4, 5)
 class BattingTeamSetup : AppCompatActivity() {
@@ -24,7 +24,7 @@ class BattingTeamSetup : AppCompatActivity() {
         ui.battersInfoList.layoutManager = LinearLayoutManager(this)
 
         ui.btnNext.setOnClickListener {
-            if(!SetupController().teamSetupValidation(ui)){
+            if(!EmptySetupValidator().teamSetupValidation(ui)){
 
                 val batters = TeamSetupController().getBatters(ui)
                 val battingTeam = Team(

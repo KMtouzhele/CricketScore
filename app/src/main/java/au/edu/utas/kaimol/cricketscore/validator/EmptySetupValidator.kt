@@ -1,11 +1,11 @@
-package au.edu.utas.kaimol.cricketscore.controller
+package au.edu.utas.kaimol.cricketscore.validator
 
 import androidx.viewbinding.ViewBinding
 import au.edu.utas.kaimol.cricketscore.databinding.ActivityBattingTeamSetupBinding
 import au.edu.utas.kaimol.cricketscore.databinding.ActivityBowlingTeamSetupBinding
 import au.edu.utas.kaimol.cricketscore.databinding.PlayersInfoListItemBinding
 
-class SetupController {
+class EmptySetupValidator {
     fun <T: ViewBinding> teamSetupValidation(viewBinding: T): Boolean {
         return when(true){
             isTeamNameEmpty(viewBinding) -> {
