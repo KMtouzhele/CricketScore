@@ -74,7 +74,7 @@ class SetupController {
 
 
     private fun isBattingTeamNameEmpty(viewBinding: ActivityBattingTeamSetupBinding): Boolean {
-        return viewBinding.txtBattingTeamNameV2.text.isNullOrEmpty()
+        return viewBinding.txtBattingTeamName.text.isNullOrEmpty()
     }
 
     private fun isBowlingTeamNameEmpty(viewBinding: ActivityBowlingTeamSetupBinding): Boolean {

@@ -1,14 +1,55 @@
 package au.edu.utas.kaimol.cricketscore.controller
 
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.viewbinding.ViewBinding
 import au.edu.utas.kaimol.cricketscore.adapter.TeamSetupAdapter
 import au.edu.utas.kaimol.cricketscore.databinding.ActivityBattingTeamSetupBinding
 import au.edu.utas.kaimol.cricketscore.databinding.ActivityBowlingTeamSetupBinding
 import au.edu.utas.kaimol.cricketscore.databinding.PlayersInfoListItemBinding
+import au.edu.utas.kaimol.cricketscore.entity.Match
 import au.edu.utas.kaimol.cricketscore.entity.Player
+import au.edu.utas.kaimol.cricketscore.entity.Team
+import au.edu.utas.kaimol.cricketscore.entity.TeamType
+import java.time.LocalDateTime
 
 class TeamSetupController {
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun saveMatchSetup(
+        batting: Team,
+        bowling: Team,
+    ) {
+        val start = LocalDateTime.now()
+        val end = null
+        val match = Match(battingTeam = batting, bowlingTeam = bowling, timeStart = start, timeEnd = end)
+
+        TeamSetupAdapter.saveMatchSetupToFirebase(match)
+    }
+
+
+    fun <T : ViewBinding> getTeam(
+        viewBinding: T,
+        name: String,
+        players: MutableList<Player>
+    ): Team {
+        val teamType: TeamType? = when (viewBinding) {
+            is ActivityBattingTeamSetupBinding -> {
+                TeamType.BATTING
+            }
+
+            is ActivityBowlingTeamSetupBinding -> {
+                TeamType.BOWLING
+            }
+
+            else -> {
+                null
+            }
+        }
+        return Team(name = name, teamType = teamType, teamPlayers = players)
+    }
+
     fun savePlayers(players: MutableList<Player>) {
-        TeamSetupAdapter().savePlayerList(players)
+        TeamSetupAdapter().savePlayerListToFirebase(players)
     }
 
     fun getBowlers(viewBinding: ActivityBowlingTeamSetupBinding): MutableList<Player> {
@@ -32,4 +73,5 @@ class TeamSetupController {
         }
         return batters
     }
+
 }

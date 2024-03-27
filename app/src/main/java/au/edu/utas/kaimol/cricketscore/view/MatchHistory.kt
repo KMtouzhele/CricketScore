@@ -3,7 +3,6 @@ package au.edu.utas.kaimol.cricketscore.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import au.edu.utas.kaimol.cricketscore.R
 import au.edu.utas.kaimol.cricketscore.databinding.ActivityMatchHistoryBinding
 
 class MatchHistory : AppCompatActivity() {

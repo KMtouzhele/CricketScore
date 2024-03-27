@@ -6,4 +6,6 @@ import com.google.firebase.firestore.firestore
 
 class FireStore {
     fun playerCollection() : CollectionReference = Firebase.firestore.collection("players")
+    fun teamCollection(): CollectionReference = Firebase.firestore.collection("teams")
+    fun matchCollection(): CollectionReference = Firebase.firestore.collection("matches")
 }
