@@ -219,7 +219,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:gravity="center_vertical"
-                        android:text="Bowler"
+                        android:text="@string/bowler"
                         android:textAlignment="gravity"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textStyle="bold" />
@@ -229,21 +229,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
                         android:gravity="center_vertical"
-                        android:text="RunsLost" />
+                        android:text="@string/runslost" />
 
                     <TextView
                         android:id="@+id/txtBallsDelivered"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
                         android:gravity="center_vertical"
-                        android:text="BallsDelivered" />
+                        android:text="@string/ballsdelivered" />
 
                     <TextView
                         android:id="@+id/txtTotalWicket"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
                         android:gravity="center_vertical"
-                        android:text="TotalWicket" />
+                        android:text="@string/totalwicket" />
 
                 </LinearLayout>
 
@@ -321,7 +321,7 @@
                         android:id="@+id/txtRun"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="RUNS"
+                        android:text="@string/runs_capital"
                         android:textStyle="bold" />
 
                     <HorizontalScrollView
@@ -338,88 +338,88 @@
                                 android:id="@+id/chip1Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1" />
+                                android:text="@string/one" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip2Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="2" />
+                                android:text="@string/two" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip3Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="3" />
+                                android:text="@string/three" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip4Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="4" />
+                                android:text="@string/four" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip5Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="5" />
+                                android:text="@string/five" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip6Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="6" />
+                                android:text="@string/six" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip7Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="7" />
+                                android:text="@string/seven" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip8Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="8" />
+                                android:text="@string/eight" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip9Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="9" />
+                                android:text="@string/nine" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip10Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="10" />
+                                android:text="@string/ten" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip11Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="11" />
+                                android:text="@string/eleven" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip12Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="12" />
+                                android:text="@string/twelve" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip13Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="13" />
+                                android:text="@string/thirteen" />
                         </com.google.android.material.chip.ChipGroup>
                     </HorizontalScrollView>
                 </LinearLayout>
 
                 <View
                     android:id="@+id/divider"
-                    android:layout_width="1dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:background="?android:attr/listDivider" />
 
@@ -427,14 +427,14 @@
                     android:id="@+id/fieldBoundaries"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/txtBoundaries"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="BOUNDARIES"
+                        android:text="@string/boundaries"
                         android:textStyle="bold" />
 
                     <com.google.android.material.chip.ChipGroup
@@ -446,14 +446,14 @@
                             android:id="@+id/chip4s"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="4s" />
+                            android:text="@string/_4s" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chip6s"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="6s" />
+                            android:text="@string/_6s" />
                     </com.google.android.material.chip.ChipGroup>
 
                 </LinearLayout>
@@ -465,7 +465,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="WICKET/OUT"
+                android:text="@string/wicket_out"
                 android:textStyle="bold" />
 
             <HorizontalScrollView
@@ -475,44 +475,44 @@
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/chipWicket"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent">
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipBowled"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bowled" />
+                        android:text="@string/bowled" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipCaught"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Caught" />
+                        android:text="@string/caught" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipCAndB"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="CAndB" />
+                        android:text="@string/candb" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipLBW"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="LBW" />
+                        android:text="@string/lbw" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipHitWicket"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hit Wicket" />
+                        android:text="@string/hit_wicket" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipRunOut"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Run Out" />
+                        android:text="@string/run_out" />
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>
 
@@ -521,7 +521,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="EXTRAS"
+                android:text="@string/extras"
                 android:textStyle="bold" />
 
             <HorizontalScrollView
@@ -538,31 +538,31 @@
                         android:id="@+id/chipNoBall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="No Ball" />
+                        android:text="@string/no_ball" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipBye"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bye" />
+                        android:text="@string/bye" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipLegByes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Leg Byes" />
+                        android:text="@string/leg_byes" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipWide"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Wide" />
+                        android:text="@string/wide" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipDeadBall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Dead Ball" />
+                        android:text="@string/dead_ball" />
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>
 
@@ -574,7 +574,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:text="Confirm"
+            android:text="@string/confirm"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
