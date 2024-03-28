@@ -9,6 +9,11 @@ import au.edu.utas.kaimol.cricketscore.entity.Team
 import kotlinx.coroutines.runBlocking
 
 class TeamSetupAdapter {
+
+    fun saveMatchToFirebase (match: Match) = runBlocking {
+        MatchDataSource().add(match)
+    }
+
     fun saveTeamToFirebase (team: Team) = runBlocking {
         TeamDataSource().add(team)
     }
@@ -18,9 +23,6 @@ class TeamSetupAdapter {
             savePlayerToFireBase(player)
         }
     }
-    private fun savePlayerToFireBase (player: Player) = runBlocking {
-        PlayerDataSource().add(player)
-    }
 
     fun savePlayersToTeam (players: MutableList<Player>, team: Team){
         val playerList = mutableListOf<String>()
@@ -29,6 +31,10 @@ class TeamSetupAdapter {
         }
         team.teamPlayers = playerList
         TeamDataSource().update(team)
+    }
+
+    private fun savePlayerToFireBase (player: Player) = runBlocking {
+        PlayerDataSource().add(player)
     }
 
 }

@@ -10,18 +10,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import au.edu.utas.kaimol.cricketscore.adapter.PlayerContainerAdapter
 import au.edu.utas.kaimol.cricketscore.controller.TeamSetupController
 import au.edu.utas.kaimol.cricketscore.databinding.ActivityBowlingTeamSetupBinding
+import au.edu.utas.kaimol.cricketscore.entity.Match
 import au.edu.utas.kaimol.cricketscore.entity.Team
+import au.edu.utas.kaimol.cricketscore.entity.TeamType
 import au.edu.utas.kaimol.cricketscore.validator.EmptySetupValidator
+import java.time.LocalDateTime
 
 private val playerIndexes = mutableListOf(1, 2, 3, 4, 5)
 class BowlingTeamSetup : AppCompatActivity() {
     private lateinit var ui : ActivityBowlingTeamSetupBinding
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ui = ActivityBowlingTeamSetupBinding.inflate(layoutInflater)
         setContentView(ui.root)
+
+
         ui.bowlersInfoList.adapter = PlayerContainerAdapter(playerIndexes)
         ui.bowlersInfoList.layoutManager = LinearLayoutManager(this)
         ui.btnBack.setOnClickListener {
@@ -29,14 +35,20 @@ class BowlingTeamSetup : AppCompatActivity() {
         }
         ui.btnMatchStarts.setOnClickListener {
             if(!EmptySetupValidator().teamSetupValidation(ui)){
+                val teamName = ui.txtBowlingTeamName.text.toString()
                 val bowlers = TeamSetupController().getBowlers(ui)
-                val bowlingTeamName = ui.txtBowlingTeamName.text.toString()
-                val bowlingTeam: Team = TeamSetupController().getTeam(ui, bowlingTeamName, bowlers)
-                val battingTeam = intent.extras?.getSerializable("battingTeam") as Team
+                val team = Team(name = teamName, teamType = TeamType.BOWLING)
+                TeamSetupController().saveTeam(team)
 
-
+                TeamSetupController().savePlayers(bowlers, team)
+                val bowlingTeamId = team.id
+                val battingTeamId = intent.getStringExtra("battingTeamId")
+                val match = Match(battingTeam = battingTeamId, bowlingTeam = bowlingTeamId, timeStart = LocalDateTime.now())
+                TeamSetupController().saveMatch(match)
+                val matchId = match.id
 
                 val i = Intent(this, Scoring::class.java)
+                i.putExtra("matchId", matchId)
                 startActivity(i)
 
             } else{

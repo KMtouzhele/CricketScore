@@ -38,7 +38,7 @@ class BattingTeamSetup : AppCompatActivity() {
                 //save Batters into Firebase
                 TeamSetupController().savePlayers(batters, team)
                 val i = Intent(this, BowlingTeamSetup::class.java)
-                i.putExtra("teamId", teamId)
+                i.putExtra("battingTeamId", teamId)
                 startActivity(i)
             } else {
                 Log.d("Invalid", "Text fields are empty. Validation failed.")

@@ -6,8 +6,8 @@ import java.time.LocalDateTime
 
 class Match(
     @get:Exclude var id: String? = null,
-    var battingTeam: Team? = null,
-    var bowlingTeam: Team? = null,
+    var battingTeam: String? = null,
+    var bowlingTeam: String? = null,
     var timeStart: LocalDateTime? = null,
     var timeEnd: LocalDateTime? = null,
 )

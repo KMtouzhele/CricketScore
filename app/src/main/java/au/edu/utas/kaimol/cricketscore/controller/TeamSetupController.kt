@@ -17,7 +17,9 @@ import java.time.LocalDateTime
 
 class TeamSetupController {
 
-
+    fun saveMatch(match: Match){
+        TeamSetupAdapter().saveMatchToFirebase(match)
+    }
     fun saveTeam(team: Team) = runBlocking{
         TeamSetupAdapter().saveTeamToFirebase(team)
     }
