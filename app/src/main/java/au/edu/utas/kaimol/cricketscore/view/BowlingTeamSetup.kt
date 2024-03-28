@@ -34,7 +34,7 @@ class BowlingTeamSetup : AppCompatActivity() {
                 val bowlingTeam: Team = TeamSetupController().getTeam(ui, bowlingTeamName, bowlers)
                 val battingTeam = intent.extras?.getSerializable("battingTeam") as Team
 
-                TeamSetupController().saveMatchSetup(battingTeam, bowlingTeam)
+
 
                 val i = Intent(this, Scoring::class.java)
                 startActivity(i)

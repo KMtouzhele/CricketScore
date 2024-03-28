@@ -513,6 +513,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/run_out" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipStumping"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stumping" />
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>
 

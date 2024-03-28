@@ -7,5 +7,5 @@ class Team (
     @get:Exclude var id : String? = null,
     var name : String? = null,
     var teamType : TeamType? = null,
-    var teamPlayers : MutableList<Player>? = null
+    var teamPlayers : MutableList<String>? = null,
 ) : Serializable

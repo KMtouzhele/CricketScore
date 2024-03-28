@@ -9,21 +9,22 @@ import au.edu.utas.kaimol.cricketscore.databinding.ActivityBowlingTeamSetupBindi
 import au.edu.utas.kaimol.cricketscore.databinding.PlayersInfoListItemBinding
 import au.edu.utas.kaimol.cricketscore.entity.Match
 import au.edu.utas.kaimol.cricketscore.entity.Player
+import au.edu.utas.kaimol.cricketscore.entity.PlayerStatus
 import au.edu.utas.kaimol.cricketscore.entity.Team
 import au.edu.utas.kaimol.cricketscore.entity.TeamType
+import kotlinx.coroutines.runBlocking
 import java.time.LocalDateTime
 
 class TeamSetupController {
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun saveMatchSetup(
-        batting: Team,
-        bowling: Team,
-    ) {
-        val start = LocalDateTime.now()
-        val end = null
-        val match = Match(battingTeam = batting, bowlingTeam = bowling, timeStart = start, timeEnd = end)
 
-        TeamSetupAdapter.saveMatchSetupToFirebase(match)
+
+    fun saveTeam(team: Team) = runBlocking{
+        TeamSetupAdapter().saveTeamToFirebase(team)
+    }
+
+    fun savePlayers(players: MutableList<Player>, team: Team) {
+        TeamSetupAdapter().savePlayersToFirebase(players)
+        TeamSetupAdapter().savePlayersToTeam(players, team)
     }
 
 
@@ -45,19 +46,16 @@ class TeamSetupController {
                 null
             }
         }
-        return Team(name = name, teamType = teamType, teamPlayers = players)
+        return Team(name = name, teamType = teamType)
     }
 
-    fun savePlayers(players: MutableList<Player>) {
-        TeamSetupAdapter().savePlayerListToFirebase(players)
-    }
 
     fun getBowlers(viewBinding: ActivityBowlingTeamSetupBinding): MutableList<Player> {
         val bowlers = mutableListOf<Player>()
         for (i in 0 until viewBinding.bowlersInfoList.childCount) {
             val childView = viewBinding.bowlersInfoList.getChildAt(i)
             val playerInfoBinding = PlayersInfoListItemBinding.bind(childView)
-            val player = Player("", i + 1, playerInfoBinding.txtPlayerName.text.toString())
+            val player = Player(id = "", position = i + 1, name = playerInfoBinding.txtPlayerName.text.toString(), status = PlayerStatus.AVAILABLE)
             bowlers.add(player)
         }
         return bowlers
@@ -68,7 +66,7 @@ class TeamSetupController {
         for (i in 0 until viewBinding.battersInfoList.childCount) {
             val childView = viewBinding.battersInfoList.getChildAt(i)
             val playerInfoBinding = PlayersInfoListItemBinding.bind(childView)
-            val player = Player("", i + 1, playerInfoBinding.txtPlayerName.text.toString())
+            val player = Player(position = i + 1, name = playerInfoBinding.txtPlayerName.text.toString(), status = PlayerStatus.AVAILABLE)
             batters.add(player)
         }
         return batters

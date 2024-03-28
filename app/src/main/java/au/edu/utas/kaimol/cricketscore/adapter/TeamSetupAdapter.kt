@@ -6,21 +6,29 @@ import au.edu.utas.kaimol.cricketscore.database.TeamDataSource
 import au.edu.utas.kaimol.cricketscore.entity.Match
 import au.edu.utas.kaimol.cricketscore.entity.Player
 import au.edu.utas.kaimol.cricketscore.entity.Team
+import kotlinx.coroutines.runBlocking
 
 class TeamSetupAdapter {
-    fun savePlayerListToFirebase(playerList: MutableList<Player>) {
-        for (i in 0 until playerList.size) {
-            PlayerDataSource().add(playerList[i])
-        }
-    }
-
-    fun saveTeamToFirebase(team: Team){
+    fun saveTeamToFirebase (team: Team) = runBlocking {
         TeamDataSource().add(team)
     }
 
-    companion object {
-        fun saveMatchSetupToFirebase(match: Match) {
-            MatchDataSource().add(match)
+    fun savePlayersToFirebase (players: MutableList<Player>){
+        for(player in players){
+            savePlayerToFireBase(player)
         }
     }
+    private fun savePlayerToFireBase (player: Player) = runBlocking {
+        PlayerDataSource().add(player)
+    }
+
+    fun savePlayersToTeam (players: MutableList<Player>, team: Team){
+        val playerList = mutableListOf<String>()
+        for(player in players){
+            playerList.add(player.id!!)
+        }
+        team.teamPlayers = playerList
+        TeamDataSource().update(team)
+    }
+
 }
