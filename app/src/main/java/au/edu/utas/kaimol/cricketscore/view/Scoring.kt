@@ -17,6 +17,10 @@ class Scoring : AppCompatActivity() {
         ui = ActivityScoringBinding.inflate(layoutInflater)
         setContentView(ui.root)
 
+        //The initial fragment should be scoreboard
+        replaceFragment(ScoreboardFragment())
+
+        //Bottom navigation based on user clicking
         ui.bottomNavigation.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.navScoreboard -> {
