@@ -38,6 +38,7 @@ class BowlingTeamSetup : AppCompatActivity() {
                 val teamName = ui.txtBowlingTeamName.text.toString()
                 val bowlers = TeamSetupController().getBowlersFromView(ui)
                 val team = Team(name = teamName, teamType = TeamType.BOWLING)
+
                 TeamSetupController().saveTeam(team)
 
                 TeamSetupController().savePlayers(bowlers, team)

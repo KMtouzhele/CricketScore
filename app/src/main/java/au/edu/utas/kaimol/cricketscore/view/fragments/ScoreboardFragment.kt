@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import au.edu.utas.kaimol.cricketscore.controller.ScoringController
 import au.edu.utas.kaimol.cricketscore.controller.TeamSetupController
 import au.edu.utas.kaimol.cricketscore.database.PlayerDataSource
 import au.edu.utas.kaimol.cricketscore.databinding.FragmentScoreboardBinding
+import com.google.android.material.chip.Chip
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -35,6 +37,7 @@ class ScoreboardFragment : Fragment() {
 
         val battingTeamId = activity?.intent?.getStringExtra("battingTeamId")
         val bowlingTeamId = activity?.intent?.getStringExtra("bowlingTeamId")
+        ui.btnConfirm.isEnabled = false
 
         GlobalScope.launch {
             val batters = PlayerDataSource().getAvailablePlayersName(battingTeamId!!)
@@ -43,10 +46,26 @@ class ScoreboardFragment : Fragment() {
                 initializeSpinners(batters, bowlers)
             }
         }
+
+        ui.chipRuns.setOnCheckedStateChangeListener() { _, _ ->
+            ScoringController(ui).btnStatusUpdates()
+        }
+        ui.chipBoundaries.setOnCheckedStateChangeListener() { _, _ ->
+            ScoringController(ui).btnStatusUpdates()
+        }
+        ui.chipWicket.setOnCheckedStateChangeListener() { _, _ ->
+            ScoringController(ui).btnStatusUpdates()
+        }
+        ui.chipExtras.setOnCheckedStateChangeListener() { _, _ ->
+            ScoringController(ui).btnStatusUpdates()
+        }
+
+        ui.btnConfirm.setOnClickListener {
+            ScoringController(ui).addBall()
+        }
     }
 
     private fun initializeSpinners(batters: MutableList<String>, bowlers: MutableList<String>){
-
         //insert prompt
         val prompt1 = "Select batter"
         val prompt2 = "Select bowler"
@@ -74,6 +93,4 @@ class ScoreboardFragment : Fragment() {
         ui.spinnerBatter2.adapter = batterAdapter2
         ui.spinnerBowler.adapter = bowlerAdapter
     }
-
-
 }

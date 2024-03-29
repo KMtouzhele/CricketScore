@@ -15,7 +15,7 @@ class TeamSetupAdapter {
         MatchDataSource().add(match)
     }
 
-    fun saveTeamToFirebase (team: Team) = runBlocking {
+    fun saveTeamToFirebase (team: Team) = runBlocking{
         TeamDataSource().add(team)
     }
 
@@ -34,31 +34,7 @@ class TeamSetupAdapter {
         TeamDataSource().update(team)
     }
 
-
-    fun getPlayersByTeamId(teamId: String): MutableList<Player> {
-        val team = getTeamById(teamId)
-        val teamPlayersId = team.teamPlayers
-        val players = mutableListOf<Player>()
-        if (teamPlayersId != null) {
-            for(playerId in teamPlayersId){
-                val player = getPlayerById(playerId)
-                players.add(player)
-            }
-        }
-        return players
-    }
-
-
     private fun savePlayerToFireBase (player: Player) = runBlocking {
         PlayerDataSource().add(player)
     }
-
-    private fun getPlayerById(playerId: String): Player  = runBlocking{
-        PlayerDataSource().get2(playerId)
-    }
-
-    private fun getTeamById(teamId: String): Team = runBlocking{
-        TeamDataSource().get2(teamId)
-    }
-
 }

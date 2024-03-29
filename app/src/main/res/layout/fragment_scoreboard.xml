@@ -332,84 +332,98 @@
                         <com.google.android.material.chip.ChipGroup
                             android:id="@+id/chipRuns"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+                            app:singleSelection="true">
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip1Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checkable="true"
                                 android:text="@string/one" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip2Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checkable="true"
                                 android:text="@string/two" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip3Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checkable="true"
                                 android:text="@string/three" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip4Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checkable="true"
                                 android:text="@string/four" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip5Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checkable="true"
                                 android:text="@string/five" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip6Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checkable="true"
                                 android:text="@string/six" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip7Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checkable="true"
                                 android:text="@string/seven" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip8Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checkable="true"
                                 android:text="@string/eight" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip9Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checkable="true"
                                 android:text="@string/nine" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip10Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checkable="true"
                                 android:text="@string/ten" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip11Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checkable="true"
                                 android:text="@string/eleven" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip12Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checkable="true"
                                 android:text="@string/twelve" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip13Runs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checkable="true"
                                 android:text="@string/thirteen" />
                         </com.google.android.material.chip.ChipGroup>
                     </HorizontalScrollView>
@@ -440,12 +454,14 @@
                     <com.google.android.material.chip.ChipGroup
                         android:id="@+id/chipBoundaries"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        app:singleSelection="true">
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chip4s"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:checkable="true"
                             android:text="@string/_4s" />
 
                         <com.google.android.material.chip.Chip
@@ -453,6 +469,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:checkable="true"
                             android:text="@string/_6s" />
                     </com.google.android.material.chip.ChipGroup>
 
@@ -476,48 +493,56 @@
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/chipWicket"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    app:singleSelection="true">
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipBowled"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checkable="true"
                         android:text="@string/bowled" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipCaught"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checkable="true"
                         android:text="@string/caught" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipCAndB"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checkable="true"
                         android:text="@string/candb" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipLBW"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checkable="true"
                         android:text="@string/lbw" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipHitWicket"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checkable="true"
                         android:text="@string/hit_wicket" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipRunOut"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checkable="true"
                         android:text="@string/run_out" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipStumping"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checkable="true"
                         android:text="@string/stumping" />
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>
@@ -538,36 +563,42 @@
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/chipExtras"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    app:singleSelection="true">
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipNoBall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checkable="true"
                         android:text="@string/no_ball" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipBye"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checkable="true"
                         android:text="@string/bye" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipLegByes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checkable="true"
                         android:text="@string/leg_byes" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipWide"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checkable="true"
                         android:text="@string/wide" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipDeadBall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checkable="true"
                         android:text="@string/dead_ball" />
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>

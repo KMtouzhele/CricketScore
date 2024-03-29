@@ -27,6 +27,7 @@ class PlayerDataSource {
         player.id = doc.id
     }
 
+
     suspend fun get(id: String) : Player = suspendCancellableCoroutine{ continuation ->
         FireStore().playerCollection()
             .document(id)
@@ -42,27 +43,9 @@ class PlayerDataSource {
             }
     }
 
-    suspend fun get2(id: String): Player{
-        val player = withContext(Dispatchers.IO){
-             suspendCoroutine <Player> { continuation ->
-                FireStore().playerCollection()
-                    .document(id)
-                    .get()
-                    .addOnSuccessListener {
-                        val player = it.toObject(Player::class.java)!!
-                        continuation.resume(player)
-                    }
-                    .addOnFailureListener {
-                        Log.e("FIREBASE", "Error getting document", it)
-                        continuation.resumeWithException(it)
-                    }
-            }
-        }
-        return player
-    }
 
     suspend fun getAvailablePlayersName(teamId: String): MutableList<String> {
-        val db = FirebaseFirestore.getInstance()
+        val db = FireStore().getInstance()
         val teamDoc = db.collection("teams").document(teamId).get().await()
         val playerIds = teamDoc.get("teamPlayers") as List<String>
 

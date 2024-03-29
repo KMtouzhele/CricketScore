@@ -52,23 +52,4 @@ class TeamDataSource {
                 continuation.resumeWithException(it)
             }
     }
-
-    suspend fun get2(id: String): Team {
-        return withContext(Dispatchers.IO){
-            suspendCoroutine {continuation ->
-                FireStore().teamCollection()
-                    .document(id)
-                    .get()
-                    .addOnSuccessListener {
-                        val team = it.toObject(Team::class.java)!!
-                        continuation.resume(team)
-                    }
-                    .addOnFailureListener {
-                        Log.e("FIREBASE", "Error getting document", it)
-                        continuation.resumeWithException(it)
-                    }
-            }
-        }
-    }
-
 }

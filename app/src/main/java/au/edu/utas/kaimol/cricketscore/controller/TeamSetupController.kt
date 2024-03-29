@@ -17,7 +17,7 @@ import java.time.LocalDateTime
 
 class TeamSetupController {
 
-    fun saveMatch(match: Match){
+    fun saveMatch(match: Match) {
         TeamSetupAdapter().saveMatchToFirebase(match)
     }
     fun saveTeam(team: Team) {
@@ -28,17 +28,6 @@ class TeamSetupController {
         TeamSetupAdapter().savePlayersToFirebase(players)
         TeamSetupAdapter().savePlayersToTeam(players, team)
     }
-
-    fun getAvailablePlayerNames(teamId : String): MutableList<String> {
-        val players = TeamSetupAdapter().getPlayersByTeamId(teamId)
-        val availablePlayers = players.filter { it.status == PlayerStatus.AVAILABLE }
-        val playerNames = mutableListOf<String>()
-        for (player in availablePlayers){
-            playerNames.add(player.name!!)
-        }
-        return playerNames
-    }
-
 
     fun getBowlersFromView(viewBinding: ActivityBowlingTeamSetupBinding): MutableList<Player> {
         val bowlers = mutableListOf<Player>()
