@@ -1,12 +1,17 @@
 package au.edu.utas.kaimol.cricketscore.database
 
+import android.content.Context
 import android.util.Log
 import au.edu.utas.kaimol.cricketscore.entity.Player
 import au.edu.utas.kaimol.cricketscore.entity.Team
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class PlayerDataSource {
     suspend fun add(player: Player) {
@@ -35,5 +40,41 @@ class PlayerDataSource {
                 Log.e("FIREBASE", "Error getting document", it)
                 continuation.resumeWithException(it)
             }
+    }
+
+    suspend fun get2(id: String): Player{
+        val player = withContext(Dispatchers.IO){
+             suspendCoroutine <Player> { continuation ->
+                FireStore().playerCollection()
+                    .document(id)
+                    .get()
+                    .addOnSuccessListener {
+                        val player = it.toObject(Player::class.java)!!
+                        continuation.resume(player)
+                    }
+                    .addOnFailureListener {
+                        Log.e("FIREBASE", "Error getting document", it)
+                        continuation.resumeWithException(it)
+                    }
+            }
+        }
+        return player
+    }
+
+    suspend fun getAvailablePlayersName(teamId: String): MutableList<String> {
+        val db = FirebaseFirestore.getInstance()
+        val teamDoc = db.collection("teams").document(teamId).get().await()
+        val playerIds = teamDoc.get("teamPlayers") as List<String>
+
+        val availablePlayerNames = mutableListOf<String>()
+        playerIds.forEach{
+            val playerDoc = db.collection("players").document(it).get().await()
+            val playerName = playerDoc.getString("name")
+            val playerStatus = playerDoc.get("status") as String
+            if(playerStatus == "AVAILABLE"){
+                availablePlayerNames.add(playerName!!)
+            }
+        }
+        return availablePlayerNames
     }
 }

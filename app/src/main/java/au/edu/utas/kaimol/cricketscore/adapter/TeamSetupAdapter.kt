@@ -54,11 +54,11 @@ class TeamSetupAdapter {
     }
 
     private fun getPlayerById(playerId: String): Player  = runBlocking{
-        PlayerDataSource().get(playerId)
+        PlayerDataSource().get2(playerId)
     }
 
     private fun getTeamById(teamId: String): Team = runBlocking{
-        TeamDataSource().get(teamId)
+        TeamDataSource().get2(teamId)
     }
 
 }

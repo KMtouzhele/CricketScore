@@ -3,10 +3,13 @@ package au.edu.utas.kaimol.cricketscore.database
 import android.util.Log
 import au.edu.utas.kaimol.cricketscore.entity.Team
 import au.edu.utas.kaimol.cricketscore.entity.TeamType
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class TeamDataSource {
     //Modified by ChatGPT
@@ -48,6 +51,24 @@ class TeamDataSource {
                 Log.e("FIREBASE", "Error getting document", it)
                 continuation.resumeWithException(it)
             }
+    }
+
+    suspend fun get2(id: String): Team {
+        return withContext(Dispatchers.IO){
+            suspendCoroutine {continuation ->
+                FireStore().teamCollection()
+                    .document(id)
+                    .get()
+                    .addOnSuccessListener {
+                        val team = it.toObject(Team::class.java)!!
+                        continuation.resume(team)
+                    }
+                    .addOnFailureListener {
+                        Log.e("FIREBASE", "Error getting document", it)
+                        continuation.resumeWithException(it)
+                    }
+            }
+        }
     }
 
 }
