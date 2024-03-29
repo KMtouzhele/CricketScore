@@ -1,14 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.fragments.SummaryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="summary" />
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:id="@+id/fieldExtras"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/fieldRunRate"
+            app:layout_constraintEnd_toEndOf="@+id/fieldCurrentOver"
+            app:layout_constraintStart_toStartOf="@+id/fieldCurrentOver"
+            app:layout_constraintTop_toTopOf="@+id/fieldRunRate">
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Extras"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtExtraValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|center_vertical"
+                android:text="10"
+                android:textAlignment="gravity"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fieldRunRate"
+            android:layout_width="0dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@+id/fieldBattingScore"
+            app:layout_constraintStart_toStartOf="@+id/fieldBattingScore"
+            app:layout_constraintTop_toBottomOf="@+id/fieldBattingScore">
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Run Rate"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtRunRateValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|center_vertical"
+                android:text="7.636"
+                android:textAlignment="gravity"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fieldCurrentOver"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/fieldBattingScore"
+            app:layout_constraintEnd_toEndOf="@+id/bowlingTeam"
+            app:layout_constraintStart_toStartOf="@+id/bowlingTeam"
+            app:layout_constraintTop_toTopOf="@+id/fieldBattingScore">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Current Over"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtCurrentOver"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|center_vertical"
+                android:text="5.3"
+                android:textAlignment="gravity"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fieldBattingScore"
+            android:layout_width="0dp"
+            android:layout_height="223dp"
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@+id/battingTeam"
+            app:layout_constraintStart_toStartOf="@+id/battingTeam"
+            app:layout_constraintTop_toBottomOf="@+id/battingTeam">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Batting Score"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtBattingSocre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|center_vertical"
+                android:text="2 / 42"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                android:textAlignment="gravity" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bowlingTeam"
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/battingTeam"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txtBowling"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bowling_team"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/bowlingTeamName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="##########"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <TextView
+                android:id="@+id/txtCurrentBowler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Current Bowler"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/battingTeam"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/bowlingTeam"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txtBatting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/batting_team"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/battingTeamName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="##########"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <TextView
+                android:id="@+id/txtCurrentBatter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Current Batter"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

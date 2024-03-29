@@ -36,7 +36,7 @@ class BowlingTeamSetup : AppCompatActivity() {
         ui.btnMatchStarts.setOnClickListener {
             if(!EmptySetupValidator().teamSetupValidation(ui)){
                 val teamName = ui.txtBowlingTeamName.text.toString()
-                val bowlers = TeamSetupController().getBowlers(ui)
+                val bowlers = TeamSetupController().getBowlersFromView(ui)
                 val team = Team(name = teamName, teamType = TeamType.BOWLING)
                 TeamSetupController().saveTeam(team)
 
@@ -49,6 +49,8 @@ class BowlingTeamSetup : AppCompatActivity() {
 
                 val i = Intent(this, Scoring::class.java)
                 i.putExtra("matchId", matchId)
+                i.putExtra("battingTeamId", battingTeamId)
+                i.putExtra("bowlingTeamId", bowlingTeamId)
                 startActivity(i)
 
             } else{

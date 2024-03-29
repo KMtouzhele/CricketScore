@@ -5,6 +5,7 @@ import au.edu.utas.kaimol.cricketscore.database.PlayerDataSource
 import au.edu.utas.kaimol.cricketscore.database.TeamDataSource
 import au.edu.utas.kaimol.cricketscore.entity.Match
 import au.edu.utas.kaimol.cricketscore.entity.Player
+import au.edu.utas.kaimol.cricketscore.entity.PlayerStatus
 import au.edu.utas.kaimol.cricketscore.entity.Team
 import kotlinx.coroutines.runBlocking
 
@@ -33,8 +34,31 @@ class TeamSetupAdapter {
         TeamDataSource().update(team)
     }
 
+
+    fun getPlayersByTeamId(teamId: String): MutableList<Player> {
+        val team = getTeamById(teamId)
+        val teamPlayersId = team.teamPlayers
+        val players = mutableListOf<Player>()
+        if (teamPlayersId != null) {
+            for(playerId in teamPlayersId){
+                val player = getPlayerById(playerId)
+                players.add(player)
+            }
+        }
+        return players
+    }
+
+
     private fun savePlayerToFireBase (player: Player) = runBlocking {
         PlayerDataSource().add(player)
+    }
+
+    private fun getPlayerById(playerId: String): Player  = runBlocking{
+        PlayerDataSource().get(playerId)
+    }
+
+    private fun getTeamById(teamId: String): Team = runBlocking{
+        TeamDataSource().get(teamId)
     }
 
 }

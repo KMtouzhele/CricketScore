@@ -33,7 +33,7 @@ class BattingTeamSetup : AppCompatActivity() {
                 //save Batting Team into Firebase and get the document id
                 TeamSetupController().saveTeam(team)
                 val teamId = team.id
-                val batters = TeamSetupController().getBatters(ui)
+                val batters = TeamSetupController().getBattersFromView(ui)
 
                 //save Batters into Firebase
                 TeamSetupController().savePlayers(batters, team)

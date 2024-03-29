@@ -2,6 +2,7 @@ package au.edu.utas.kaimol.cricketscore.database
 
 import android.util.Log
 import au.edu.utas.kaimol.cricketscore.entity.Team
+import au.edu.utas.kaimol.cricketscore.entity.TeamType
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.tasks.await
 import kotlin.coroutines.resume
@@ -35,17 +36,18 @@ class TeamDataSource {
             }
     }
 
-    fun get(id: String) : Team{
-        var team : Team = Team(teamPlayers = mutableListOf())
+    suspend fun get(id: String) : Team = suspendCancellableCoroutine{ continuation ->
         FireStore().teamCollection()
             .document(id)
             .get()
             .addOnSuccessListener {
-                team = it.toObject(Team::class.java)!!
+                val team = it.toObject(Team::class.java)!!
+                continuation.resume(team)
             }
             .addOnFailureListener {
                 Log.e("FIREBASE", "Error getting document", it)
+                continuation.resumeWithException(it)
             }
-        return team
     }
+
 }

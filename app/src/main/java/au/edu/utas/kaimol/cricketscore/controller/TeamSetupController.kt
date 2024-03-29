@@ -20,7 +20,7 @@ class TeamSetupController {
     fun saveMatch(match: Match){
         TeamSetupAdapter().saveMatchToFirebase(match)
     }
-    fun saveTeam(team: Team) = runBlocking{
+    fun saveTeam(team: Team) {
         TeamSetupAdapter().saveTeamToFirebase(team)
     }
 
@@ -29,30 +29,18 @@ class TeamSetupController {
         TeamSetupAdapter().savePlayersToTeam(players, team)
     }
 
-
-    fun <T : ViewBinding> getTeam(
-        viewBinding: T,
-        name: String,
-        players: MutableList<Player>
-    ): Team {
-        val teamType: TeamType? = when (viewBinding) {
-            is ActivityBattingTeamSetupBinding -> {
-                TeamType.BATTING
-            }
-
-            is ActivityBowlingTeamSetupBinding -> {
-                TeamType.BOWLING
-            }
-
-            else -> {
-                null
-            }
+    fun getAvailablePlayerNames(teamId : String): MutableList<String> {
+        val players = TeamSetupAdapter().getPlayersByTeamId(teamId)
+        val availablePlayers = players.filter { it.status == PlayerStatus.AVAILABLE }
+        val playerNames = mutableListOf<String>()
+        for (player in availablePlayers){
+            playerNames.add(player.name!!)
         }
-        return Team(name = name, teamType = teamType)
+        return playerNames
     }
 
 
-    fun getBowlers(viewBinding: ActivityBowlingTeamSetupBinding): MutableList<Player> {
+    fun getBowlersFromView(viewBinding: ActivityBowlingTeamSetupBinding): MutableList<Player> {
         val bowlers = mutableListOf<Player>()
         for (i in 0 until viewBinding.bowlersInfoList.childCount) {
             val childView = viewBinding.bowlersInfoList.getChildAt(i)
@@ -63,7 +51,7 @@ class TeamSetupController {
         return bowlers
     }
 
-    fun getBatters(viewBinding: ActivityBattingTeamSetupBinding): MutableList<Player> {
+    fun getBattersFromView(viewBinding: ActivityBattingTeamSetupBinding): MutableList<Player> {
         val batters = mutableListOf<Player>()
         for (i in 0 until viewBinding.battersInfoList.childCount) {
             val childView = viewBinding.battersInfoList.getChildAt(i)
