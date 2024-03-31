@@ -3,6 +3,7 @@ package au.edu.utas.kaimol.cricketscore.database
 import android.content.Context
 import android.util.Log
 import au.edu.utas.kaimol.cricketscore.entity.Player
+import au.edu.utas.kaimol.cricketscore.entity.PlayerStatus
 import au.edu.utas.kaimol.cricketscore.entity.Team
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
@@ -59,5 +60,31 @@ class PlayerDataSource {
             }
         }
         return availablePlayerNames
+    }
+
+    suspend fun getAvailablePlayers(teamId: String): MutableList<Player>{
+        val db = FireStore().getInstance()
+        val teamDoc = db.collection("teams").document(teamId).get().await()
+        val playerIds = teamDoc.get("teamPlayers") as List<String>
+
+        val availablePlayers = mutableListOf<Player>()
+        playerIds.forEach{ it ->
+            val playerDoc = db.collection("players").document(it).get().await()
+            val playerName = playerDoc.getString("name")
+            val playerStatus = playerDoc.get("status") as String
+            val position = playerDoc.get("position") as Int
+            if(playerStatus == "AVAILABLE"){
+                val player = Player(id = it, name = playerName!!, position = position, status = PlayerStatus.AVAILABLE)
+                availablePlayers.add(player)
+                availablePlayers.sortBy { position }
+            }
+        }
+        return availablePlayers
+    }
+
+    suspend fun getPlayerIdFromName(playerName: String): String {
+        val db = FireStore().playerCollection()
+        val playerQuery = db.whereEqualTo("name", playerName).get().await()
+        return playerQuery.documents[0].id
     }
 }

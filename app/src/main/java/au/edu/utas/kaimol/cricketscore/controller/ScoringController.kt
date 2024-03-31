@@ -2,16 +2,37 @@ package au.edu.utas.kaimol.cricketscore.controller
 
 import androidx.viewbinding.ViewBinding
 import au.edu.utas.kaimol.cricketscore.databinding.FragmentScoreboardBinding
+import au.edu.utas.kaimol.cricketscore.entity.Ball
+import au.edu.utas.kaimol.cricketscore.entity.ResultType
 
-class ScoringController(private val ui: FragmentScoreboardBinding) {
+class ScoringController(private val ui: FragmentScoreboardBinding, private val matchId: String) {
 
     fun addBall() {
-        val currentBatter = ui.spinnerBatter1.selectedItem.toString()
-        val nonBatter = ui.spinnerBatter2.selectedItem.toString()
-        val bowler = ui.spinnerBowler.selectedItem.toString()
+        val ball = Ball()
+        ball.matchId = matchId
+        ball.ballsDelivered = isBallDelivered()
+        ball.currentBatter = ""
+        ball.nonBatter = ""
+        ball.bowler = ""
+        ball.runs = getRuns()
+        ball.result = getType()
     }
-    fun addRun() {
-        var runs: Int? = null
+
+
+    fun btnStatusUpdates() {
+        ui.btnConfirm.isEnabled = !(ui.chipRuns.checkedChipId != -1
+                && ui.chipBoundaries.checkedChipId != -1
+                && ui.chipWicket.checkedChipId != -1
+                && ui.chipExtras.checkedChipId != -1)
+
+    }
+
+    private fun isBallDelivered(): Boolean{
+        return ui.chipExtras.checkedChipId != -1
+    }
+
+    private fun getRuns(): Int{
+        var runs: Int = 0
         when(ui.chipRuns.checkedChipId){
             ui.chip1Runs.id -> { runs = 1 }
             ui.chip2Runs.id -> { runs = 2 }
@@ -27,24 +48,51 @@ class ScoringController(private val ui: FragmentScoreboardBinding) {
             ui.chip12Runs.id -> { runs = 12 }
             ui.chip13Runs.id -> { runs = 13 }
         }
-        addBall()
+        return runs
     }
 
-    fun addBoundaries() {}
-
-    fun addWicket() {}
-
-    fun addExtras() {}
-
-    fun btnStatusUpdates() {
-        ui.btnConfirm.isEnabled = !(ui.chipRuns.checkedChipId != -1
-                && ui.chipBoundaries.checkedChipId != -1
-                && ui.chipWicket.checkedChipId != -1
-                && ui.chipExtras.checkedChipId != -1)
-
+    private fun getType(): ResultType{
+        return if (wicketType() != null){
+            wicketType()!!
+        } else if (extraType() != null){
+            extraType()!!
+        } else if (boundaryType() != null){
+            boundaryType()!!
+        } else {
+            ResultType.RUNS
+        }
     }
 
-    fun getResult(){
+    private fun wicketType(): ResultType? {
+        var type: ResultType? = null
+        when(ui.chipWicket.checkedChipId){
+            ui.chipBowled.id -> { type = ResultType.BOWLED }
+            ui.chipCaught.id -> { type = ResultType.CATCH }
+            ui.chipLBW.id -> { type = ResultType.LBW }
+            ui.chipRunOut.id -> { type = ResultType.RUN_OUT }
+            ui.chipStumping.id -> { type = ResultType.STUMPING }
+            ui.chipHitWicket.id -> { type = ResultType.HIT_WICKET }
+        }
+        return type
+    }
 
+    private fun extraType(): ResultType? {
+        var type: ResultType? = null
+        when(ui.chipExtras.checkedChipId){
+            ui.chipNoBall.id -> { type = ResultType.NO_BALL }
+            ui.chipBye.id -> { type = ResultType.BYE }
+            ui.chipLegByes.id -> { type = ResultType.LEG_BYES }
+            ui.chipWide.id -> { type = ResultType.WIDE }
+            ui.chipDeadBall.id -> { type = ResultType.DEAD_BALL }
+        }
+        return type
+    }
+
+    private fun boundaryType(): ResultType? {
+        var type: ResultType? = null
+        if(ui.chipBoundaries.checkedChipId >= 0 ){
+            type = ResultType.BOUNDARIES
+        }
+        return type
     }
 }

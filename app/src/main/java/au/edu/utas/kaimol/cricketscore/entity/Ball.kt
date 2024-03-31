@@ -2,8 +2,9 @@ package au.edu.utas.kaimol.cricketscore.entity
 
 import com.google.firebase.firestore.Exclude
 
-class Balls (
+class Ball (
     @get:Exclude var id: String? = null,
+    var matchId: String? = null,
     var ballsDelivered: Boolean? = null,
     var currentBatter: String? = null,
     var nonBatter: String? = null,

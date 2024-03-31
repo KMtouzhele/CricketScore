@@ -51,4 +51,8 @@ class TeamSetupController {
         return batters
     }
 
+    fun getPlayerIdFromName(name: String): String{
+        return ""
+    }
+
 }
