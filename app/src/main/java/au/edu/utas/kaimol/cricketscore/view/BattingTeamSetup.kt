@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import au.edu.utas.kaimol.cricketscore.adapter.PlayerContainerAdapter
 import au.edu.utas.kaimol.cricketscore.controller.TeamSetupController
 import au.edu.utas.kaimol.cricketscore.databinding.ActivityBattingTeamSetupBinding
+import au.edu.utas.kaimol.cricketscore.entity.Player
 import au.edu.utas.kaimol.cricketscore.entity.Team
 import au.edu.utas.kaimol.cricketscore.entity.TeamType
 import au.edu.utas.kaimol.cricketscore.validator.EmptySetupValidator
@@ -30,6 +31,7 @@ class BattingTeamSetup : AppCompatActivity() {
             if(!EmptySetupValidator().teamSetupValidation(ui)){
                 val teamName = ui.txtBattingTeamName.text.toString()
                 val team = Team(name = teamName, teamType = TeamType.BATTING)
+
                 //save Batting Team into Firebase and get the document id
                 TeamSetupController().saveTeam(team)
                 val teamId = team.id
@@ -39,6 +41,9 @@ class BattingTeamSetup : AppCompatActivity() {
                 TeamSetupController().savePlayers(batters, team)
                 val i = Intent(this, BowlingTeamSetup::class.java)
                 i.putExtra("battingTeamId", teamId)
+                for (index in 0 until batters.size){
+                    i.putExtra("batter${index + 1}", batters[index].name)
+                }
                 startActivity(i)
             } else {
                 Log.d("Invalid", "Text fields are empty. Validation failed.")

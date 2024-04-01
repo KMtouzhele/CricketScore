@@ -11,6 +11,7 @@ import au.edu.utas.kaimol.cricketscore.adapter.PlayerContainerAdapter
 import au.edu.utas.kaimol.cricketscore.controller.TeamSetupController
 import au.edu.utas.kaimol.cricketscore.databinding.ActivityBowlingTeamSetupBinding
 import au.edu.utas.kaimol.cricketscore.entity.Match
+import au.edu.utas.kaimol.cricketscore.entity.Player
 import au.edu.utas.kaimol.cricketscore.entity.Team
 import au.edu.utas.kaimol.cricketscore.entity.TeamType
 import au.edu.utas.kaimol.cricketscore.validator.EmptySetupValidator
@@ -27,6 +28,11 @@ class BowlingTeamSetup : AppCompatActivity() {
         ui = ActivityBowlingTeamSetupBinding.inflate(layoutInflater)
         setContentView(ui.root)
 
+        val batter1Name = intent.getStringExtra("batter1")
+        val batter2Name = intent.getStringExtra("batter2")
+        val batter3Name = intent.getStringExtra("batter3")
+        val batter4Name = intent.getStringExtra("batter4")
+        val batter5Name = intent.getStringExtra("batter5")
 
         ui.bowlersInfoList.adapter = PlayerContainerAdapter(playerIndexes)
         ui.bowlersInfoList.layoutManager = LinearLayoutManager(this)
@@ -52,6 +58,14 @@ class BowlingTeamSetup : AppCompatActivity() {
                 i.putExtra("matchId", matchId)
                 i.putExtra("battingTeamId", battingTeamId)
                 i.putExtra("bowlingTeamId", bowlingTeamId)
+                i.putExtra("batter1", batter1Name)
+                i.putExtra("batter2", batter2Name)
+                i.putExtra("batter3", batter3Name)
+                i.putExtra("batter4", batter4Name)
+                i.putExtra("batter5", batter5Name)
+                for (index in 0 until bowlers.size){
+                    i.putExtra("bowler${index + 1}", bowlers[index].name)
+                }
                 startActivity(i)
 
             } else{

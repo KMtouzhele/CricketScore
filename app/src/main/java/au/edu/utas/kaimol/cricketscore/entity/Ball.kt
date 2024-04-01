@@ -10,5 +10,5 @@ class Ball (
     var nonBatter: String? = null,
     var bowler: String? = null,
     var result: ResultType? = null,
-    var runs: Int? = null
+    var runs: Int = 0
 )

@@ -44,23 +44,22 @@ class PlayerDataSource {
             }
     }
 
-
-    suspend fun getAvailablePlayersName(teamId: String): MutableList<String> {
-        val db = FireStore().getInstance()
-        val teamDoc = db.collection("teams").document(teamId).get().await()
-        val playerIds = teamDoc.get("teamPlayers") as List<String>
-
-        val availablePlayerNames = mutableListOf<String>()
-        playerIds.forEach{
-            val playerDoc = db.collection("players").document(it).get().await()
-            val playerName = playerDoc.getString("name")
-            val playerStatus = playerDoc.get("status") as String
-            if(playerStatus == "AVAILABLE"){
-                availablePlayerNames.add(playerName!!)
+    fun update(battingTeamId: String, position: Int){
+        val dbTeam = FireStore().teamCollection()
+        val dbPlayer = FireStore().playerCollection()
+        dbTeam.document(battingTeamId).get().addOnSuccessListener { it ->
+            for (player in it.get("teamPlayers") as MutableList<*>){
+                dbPlayer.document(player.toString()).get().addOnSuccessListener { doc ->
+                    if(doc.get("position") as Int == position){
+                        dbPlayer.document(player.toString()).update("status", "DISMISSED").addOnSuccessListener {
+                            Log.d("FIREBASE", "Player status updated to DISMISSED")
+                        }
+                    }
+                }
             }
         }
-        return availablePlayerNames
     }
+
 
     suspend fun getAvailablePlayers(teamId: String): MutableList<Player>{
         val db = FireStore().getInstance()

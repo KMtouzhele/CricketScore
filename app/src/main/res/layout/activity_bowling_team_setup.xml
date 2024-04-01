@@ -45,6 +45,7 @@
         android:ems="10"
         android:hint="@string/bowling_team_name"
         android:inputType="text"
+        android:text="Moonlight"
         app:layout_constraintBottom_toTopOf="@+id/bowlersInfoList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -7,23 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import au.edu.utas.kaimol.cricketscore.controller.ScoringController
-import au.edu.utas.kaimol.cricketscore.database.PlayerDataSource
 import au.edu.utas.kaimol.cricketscore.databinding.FragmentScoreboardBinding
+import au.edu.utas.kaimol.cricketscore.entity.Ball
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class ScoreboardFragment : Fragment() {
     private lateinit var batterAdapter1 : ArrayAdapter<String>
     private lateinit var batterAdapter2 : ArrayAdapter<String>
     private lateinit var bowlerAdapter : ArrayAdapter<String>
     private lateinit var ui : FragmentScoreboardBinding
-    private var matchId : String = ""
-    private val prompt1 = "Select batter"
-    private val prompt2 = "Select bowler"
-    private val loading = "Loading..."
-    private var placeholderBatters = mutableListOf<String>(prompt1,loading)
-    private var placeholderBowlers = mutableListOf<String>(prompt2,loading)
+    private var prompt: String = "Select"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,35 +32,65 @@ class ScoreboardFragment : Fragment() {
 
         val battingTeamId = activity?.intent?.getStringExtra("battingTeamId")
         val bowlingTeamId = activity?.intent?.getStringExtra("bowlingTeamId")
-        matchId = activity?.intent?.getStringExtra("matchId").toString()
-        ui.btnConfirm.isEnabled = false
+        val batterNameArray = mutableListOf<String>()
+        val bowlerNameArray = mutableListOf<String>()
+        val matchId = activity?.intent?.getStringExtra("matchId").toString()
+        var currentOver  = 1
+        var overBallsDelivered = 0
+        var totalBallsDelivered = 0
 
-        GlobalScope.launch {
-            val batters = PlayerDataSource().getAvailablePlayersName(battingTeamId!!)
-            val bowlers = PlayerDataSource().getAvailablePlayersName(bowlingTeamId!!)
-            requireActivity().runOnUiThread {
-                initializeSpinners(batters, bowlers)
-            }
+        for (i in 1..5){
+            val batterName = activity?.intent?.getStringExtra("batter$i")
+            batterNameArray.add(batterName.toString())
         }
+        batterNameArray.add(0,prompt)
+
+        for(i in 1..5){
+            val bowlerName = activity?.intent?.getStringExtra("bowler$i")
+            bowlerNameArray.add(bowlerName.toString())
+        }
+        bowlerNameArray.add(0,prompt)
+
+        initializeSpinners(batterNameArray, bowlerNameArray)
+
+        ui.btnConfirm.isEnabled = false
 
 
         ui.chipRuns.setOnCheckedStateChangeListener() { _, _ ->
-            ScoringController(ui, matchId).btnStatusUpdates()
+            ScoringController(ui).btnStatusUpdates()
         }
         ui.chipBoundaries.setOnCheckedStateChangeListener() { _, _ ->
-            ScoringController(ui, matchId).btnStatusUpdates()
+            ScoringController(ui).btnStatusUpdates()
         }
         ui.chipWicket.setOnCheckedStateChangeListener() { _, _ ->
-            ScoringController(ui, matchId).btnStatusUpdates()
+            ScoringController(ui).btnStatusUpdates()
         }
         ui.chipExtras.setOnCheckedStateChangeListener() { _, _ ->
-            ScoringController(ui, matchId).btnStatusUpdates()
+            ScoringController(ui).btnStatusUpdates()
         }
         ui.btnConfirm.setOnClickListener {
-            ScoringController(ui, matchId).addBall()
+            if (battingTeamId != null && bowlingTeamId != null) {
+                val ball = Ball()
+                ball.matchId = matchId
+                ball.ballsDelivered = ScoringController(ui).isBallDelivered()
+                ball.currentBatter = ui.spinnerBatter1.selectedItem.toString()
+                ball.nonBatter = ui.spinnerBatter2.selectedItem.toString()
+                ball.bowler = ui.spinnerBowler.selectedItem.toString()
+                ball.runs = ScoringController(ui).getRuns()
+                ball.result = ScoringController(ui).getType()
+                ScoringController(ui).addBall(ball, battingTeamId, bowlingTeamId)
+                refreshSpinner(ui, batterNameArray, bowlerNameArray)
+                if(ball.ballsDelivered!!){
+                    overBallsDelivered++
+                    totalBallsDelivered++
+                }
+                if(overBallsDelivered == 6){
+                    currentOver++
+                    overBallsDelivered = 0
+                }
+
+            }
         }
-
-
     }
 
     private fun initializeSpinners(batters: MutableList<String>, bowlers: MutableList<String>){
@@ -92,5 +115,16 @@ class ScoreboardFragment : Fragment() {
         ui.spinnerBatter1.adapter = batterAdapter1
         ui.spinnerBatter2.adapter = batterAdapter2
         ui.spinnerBowler.adapter = bowlerAdapter
+
+    }
+
+    //TODO refresh spinner
+    private fun refreshSpinner(ui: FragmentScoreboardBinding, batters: MutableList<String>, bowlers: MutableList<String>){
+        val spinner1Selected = ui.spinnerBatter1.selectedItemPosition
+        val spinner2Selected = ui.spinnerBatter2.selectedItemPosition
+        if(ui.chipWicket.checkedChipId != -1){
+            initializeSpinners(batters, bowlers)
+            ui.spinnerBatter1.setSelection(0)
+        }
     }
 }

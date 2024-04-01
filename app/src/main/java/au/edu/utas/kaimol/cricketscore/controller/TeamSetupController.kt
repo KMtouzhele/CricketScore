@@ -47,12 +47,8 @@ class TeamSetupController {
             val playerInfoBinding = PlayersInfoListItemBinding.bind(childView)
             val player = Player(position = i + 1, name = playerInfoBinding.txtPlayerName.text.toString(), status = PlayerStatus.AVAILABLE)
             batters.add(player)
+            batters.sortBy { it.position }
         }
         return batters
     }
-
-    fun getPlayerIdFromName(name: String): String{
-        return ""
-    }
-
 }
