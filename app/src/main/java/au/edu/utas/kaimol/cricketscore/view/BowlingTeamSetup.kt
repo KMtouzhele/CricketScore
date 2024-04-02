@@ -48,16 +48,20 @@ class BowlingTeamSetup : AppCompatActivity() {
                 TeamSetupController().saveTeam(team)
 
                 TeamSetupController().savePlayers(bowlers, team)
-                val bowlingTeamId = team.id
-                val battingTeamId = intent.getStringExtra("battingTeamId")
-                val match = Match(battingTeam = battingTeamId, bowlingTeam = bowlingTeamId, timeStart = LocalDateTime.now())
+                val bowlingTeamName = team.name
+                val battingTeamName = intent.getStringExtra("battingTeamName")
+                val match = Match(
+                    battingTeam = battingTeamName,
+                    bowlingTeam = bowlingTeamName,
+                    timeStart = LocalDateTime.now()
+                )
                 TeamSetupController().saveMatch(match)
                 val matchId = match.id
 
                 val i = Intent(this, Scoring::class.java)
                 i.putExtra("matchId", matchId)
-                i.putExtra("battingTeamId", battingTeamId)
-                i.putExtra("bowlingTeamId", bowlingTeamId)
+                i.putExtra("battingTeamName", battingTeamName)
+                i.putExtra("bowlingTeamName", bowlingTeamName)
                 i.putExtra("batter1", batter1Name)
                 i.putExtra("batter2", batter2Name)
                 i.putExtra("batter3", batter3Name)

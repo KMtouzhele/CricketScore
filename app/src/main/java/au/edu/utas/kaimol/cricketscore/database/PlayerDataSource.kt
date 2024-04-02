@@ -15,50 +15,28 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class PlayerDataSource {
-    suspend fun add(player: Player) {
-        val doc = FireStore().playerCollection()
-            .add(player)
+    fun add(player: Player) {
+        FireStore().playerCollection().document(player.name!!)
+            .set(player)
             .addOnSuccessListener {
-                Log.d("FIREBASE", "DocumentSnapshot added with ID: ${it.id}")
+                Log.d("FIREBASE", "DocumentSnapshot added with ID: ${player.name}")
             }
             .addOnFailureListener {
                 Log.e("FIREBASE", "Error adding document", it)
             }
-            .await()
-        player.id = doc.id
     }
 
-
-    suspend fun get(id: String) : Player = suspendCancellableCoroutine{ continuation ->
-        FireStore().playerCollection()
-            .document(id)
-            .get()
+    fun update(player: Player) {
+        FireStore().playerCollection().document(player.name!!)
+            .set(player)
             .addOnSuccessListener {
-                val player = it.toObject(Player::class.java)!!
-                player.id = it.id
-                continuation.resume(player)
+                Log.d("FIREBASE", "DocumentSnapshot successfully updated!")
             }
             .addOnFailureListener {
-                Log.e("FIREBASE", "Error getting document", it)
-                continuation.resumeWithException(it)
+                Log.e("FIREBASE", "Error updating document", it)
             }
     }
 
-    fun update(battingTeamId: String, position: Int){
-        val dbTeam = FireStore().teamCollection()
-        val dbPlayer = FireStore().playerCollection()
-        dbTeam.document(battingTeamId).get().addOnSuccessListener { it ->
-            for (player in it.get("teamPlayers") as MutableList<*>){
-                dbPlayer.document(player.toString()).get().addOnSuccessListener { doc ->
-                    if(doc.get("position") as Int == position){
-                        dbPlayer.document(player.toString()).update("status", "DISMISSED").addOnSuccessListener {
-                            Log.d("FIREBASE", "Player status updated to DISMISSED")
-                        }
-                    }
-                }
-            }
-        }
-    }
 
 
     suspend fun getAvailablePlayers(teamId: String): MutableList<Player>{
@@ -81,9 +59,4 @@ class PlayerDataSource {
         return availablePlayers
     }
 
-    suspend fun getPlayerIdFromName(playerName: String): String {
-        val db = FireStore().playerCollection()
-        val playerQuery = db.whereEqualTo("name", playerName).get().await()
-        return playerQuery.documents[0].id
-    }
 }

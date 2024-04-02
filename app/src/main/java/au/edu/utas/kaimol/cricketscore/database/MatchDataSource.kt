@@ -6,16 +6,14 @@ import au.edu.utas.kaimol.cricketscore.entity.Player
 import kotlinx.coroutines.tasks.await
 
 class MatchDataSource {
-    suspend fun add(match: Match){
-        val doc = FireStore().matchCollection()
-            .add(match)
+    fun add(match: Match){
+        FireStore().matchCollection().document(match.battingTeam!! + "vs" + match.bowlingTeam!!)
+            .set(match)
             .addOnSuccessListener {
-                Log.d("FIREBASE", "DocumentSnapshot added with ID: ${it.id}")
+                Log.d("FIREBASE", "DocumentSnapshot added with ID: ${match.battingTeam!! + "vs" + match.bowlingTeam!!}")
             }
             .addOnFailureListener {
                 Log.e("FIREBASE", "Error adding document", it)
             }
-            .await()
-        match.id = doc.id
     }
 }

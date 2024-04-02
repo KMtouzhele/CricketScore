@@ -13,11 +13,11 @@ import kotlinx.coroutines.runBlocking
 
 class TeamSetupAdapter {
 
-    fun saveMatchToFirebase (match: Match) = runBlocking {
+    fun saveMatchToFirebase (match: Match) {
         MatchDataSource().add(match)
     }
 
-    fun saveTeamToFirebase (team: Team) = runBlocking{
+    fun saveTeamToFirebase (team: Team) {
         TeamDataSource().add(team)
     }
 
@@ -30,7 +30,7 @@ class TeamSetupAdapter {
     fun savePlayersToTeam (players: MutableList<Player>, team: Team){
         val playerList = mutableListOf<String>()
         for(player in players){
-            playerList.add(player.id!!)
+            playerList.add(player.name!!)
         }
         team.teamPlayers = playerList
         TeamDataSource().update(team)

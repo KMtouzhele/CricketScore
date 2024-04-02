@@ -13,23 +13,20 @@ import kotlin.coroutines.suspendCoroutine
 
 class TeamDataSource {
     //Modified by ChatGPT
-    suspend fun add(team: Team){
-            val doc = FireStore().teamCollection()
-                .add(team)
+    fun add(team: Team){
+            FireStore().teamCollection().document(team.name!!)
+                .set(team)
                 .addOnSuccessListener {
-                    Log.d("FIREBASE", "DocumentSnapshot added with ID: ${it.id}")
+                    Log.d("FIREBASE", "DocumentSnapshot added with ID: ${team.name}")
 
                 }
                 .addOnFailureListener {
                     Log.e("FIREBASE", "Error adding document", it)
                 }
-                .await()
-        team.id = doc.id
     }
 
     fun update(team: Team) {
-        FireStore().teamCollection()
-            .document(team.id!!)
+        FireStore().teamCollection().document(team.name!!)
             .set(team)
             .addOnSuccessListener {
                 Log.d("FIREBASE", "Successfully updated team: ${team.id}")

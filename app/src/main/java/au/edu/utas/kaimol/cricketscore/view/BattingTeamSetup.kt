@@ -32,15 +32,13 @@ class BattingTeamSetup : AppCompatActivity() {
                 val teamName = ui.txtBattingTeamName.text.toString()
                 val team = Team(name = teamName, teamType = TeamType.BATTING)
 
-                //save Batting Team into Firebase and get the document id
                 TeamSetupController().saveTeam(team)
-                val teamId = team.id
                 val batters = TeamSetupController().getBattersFromView(ui)
 
                 //save Batters into Firebase
                 TeamSetupController().savePlayers(batters, team)
                 val i = Intent(this, BowlingTeamSetup::class.java)
-                i.putExtra("battingTeamId", teamId)
+                i.putExtra("battingTeamName", team.name)
                 for (index in 0 until batters.size){
                     i.putExtra("batter${index + 1}", batters[index].name)
                 }

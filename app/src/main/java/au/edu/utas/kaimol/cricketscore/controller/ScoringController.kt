@@ -1,5 +1,6 @@
 package au.edu.utas.kaimol.cricketscore.controller
 
+import android.util.Log
 import androidx.viewbinding.ViewBinding
 import au.edu.utas.kaimol.cricketscore.adapter.ScoringAdapter
 import au.edu.utas.kaimol.cricketscore.databinding.FragmentScoreboardBinding
@@ -9,15 +10,13 @@ import au.edu.utas.kaimol.cricketscore.view.fragments.ScoreboardFragment
 
 class ScoringController(private val ui: FragmentScoreboardBinding) {
 
-    fun addBall(ball: Ball, battingTeamId: String, bowlingTeamId: String){
+    fun addBall(ball: Ball){
         ScoringAdapter().saveBallToFirebase(ball)
-        refreshChipSelection()
-
-        // TODO Update player status
         if (wicketType() != null){
             val position = ui.spinnerBatter1.selectedItemPosition
-            ScoringAdapter().updateBatterStatus(ball, battingTeamId, position)
+            ScoringAdapter().updateBatterStatus(ball, ui.spinnerBatter1.selectedItem.toString(), position)
         }
+        scoreCounter()
     }
 
 
@@ -26,7 +25,6 @@ class ScoringController(private val ui: FragmentScoreboardBinding) {
                 && ui.chipBoundaries.checkedChipId != -1
                 && ui.chipWicket.checkedChipId != -1
                 && ui.chipExtras.checkedChipId != -1)
-
     }
 
     fun isBallDelivered(): Boolean{
@@ -45,6 +43,74 @@ class ScoringController(private val ui: FragmentScoreboardBinding) {
             getRunRuns()
         }
         return runs
+    }
+
+    private fun scoreCounter(){
+        runsCounter()
+        ballsFacedCounter()
+        boundaryCounter()
+        runsLostCounter()
+        ballsDeliveredCounter()
+        wicketCounter()
+    }
+
+    private fun runsCounter(){
+        var runsBatter1 = ui.runsBatter1.text.toString().toInt()
+        val runsAdded = getRuns()
+        runsBatter1 += runsAdded
+        ui.runsBatter1.text = runsBatter1.toString()
+    }
+
+    private fun ballsFacedCounter(){
+        var ballsFaced = ui.ballsFacedBatter1.text.toString().toInt()
+        when (isBallDelivered()){
+            true -> {
+                ballsFaced++
+                ui.ballsFacedBatter1.text = ballsFaced.toString()
+            }
+            false ->{
+                ui.ballsFacedBatter1.text = ballsFaced.toString()
+            }
+
+        }
+    }
+
+    private fun boundaryCounter(){
+        var boundary4 = ui.fourSBatter1.text.toString().toInt()
+        var boundary6 = ui.sixSBatter1.text.toString().toInt()
+        when(getBoundaryRuns()){
+            4 -> {
+                boundary4++
+                ui.fourSBatter1.text = boundary4.toString()
+            }
+            6 -> {
+                boundary6++
+                ui.sixSBatter1.text = boundary6.toString()
+            }
+        }
+    }
+
+    private fun runsLostCounter(){
+        var runsLost = ui.runsLostBowler.text.toString().toInt()
+        val runsLostAdded = getRuns()
+        runsLost += runsLostAdded
+        ui.runsLostBowler.text = runsLost.toString()
+    }
+
+    private fun ballsDeliveredCounter(){
+        var ballsDelivered = ui.ballsDeliveredBowler.text.toString().toInt()
+        if (isBallDelivered()){
+            ballsDelivered++
+            ui.ballsDeliveredBowler.text = ballsDelivered.toString()
+        }
+    }
+
+    private fun wicketCounter(){
+        var wickets = ui.totalWicketBowler.text.toString().toInt()
+        if (wicketType() != null){
+            wickets++
+            ui.totalWicketBowler.text = wickets.toString()
+        }
     }
 
     private fun getRunRuns(): Int{
@@ -67,12 +133,13 @@ class ScoringController(private val ui: FragmentScoreboardBinding) {
         return runs
     }
 
-    private fun getBoundaryRuns(): Int{
-        var runs: Int = 0
-        when(ui.chipBoundaries.checkedChipId){
-            ui.chip4Runs.id -> { runs = 4 }
-            ui.chip6Runs.id -> { runs = 6 }
+    private fun getBoundaryRuns(): Int {
+        val runs = when(ui.chipBoundaries.checkedChipId){
+            ui.chip4s.id -> { 4 }
+            ui.chip6s.id -> { 6 }
+            else -> { 0 }
         }
+        Log.d("BOUNDARIES", "Boundary runs: $runs" + " " + "Boundary chip id: ${ui.chipBoundaries.checkedChipId}")
         return runs
     }
 
@@ -98,7 +165,7 @@ class ScoringController(private val ui: FragmentScoreboardBinding) {
         }
     }
 
-    private fun wicketType(): ResultType? {
+    fun wicketType(): ResultType? {
         var type: ResultType? = null
         when(ui.chipWicket.checkedChipId){
             ui.chipBowled.id -> { type = ResultType.BOWLED }
@@ -132,11 +199,5 @@ class ScoringController(private val ui: FragmentScoreboardBinding) {
         return type
     }
 
-    private fun refreshChipSelection(){
-        ui.chipRuns.clearCheck()
-        ui.chipBoundaries.clearCheck()
-        ui.chipWicket.clearCheck()
-        ui.chipExtras.clearCheck()
-        ui.btnConfirm.isEnabled = false
-    }
+
 }

@@ -23,7 +23,7 @@
             android:ems="10"
             android:hint="@string/enter_player_s_name"
             android:inputType="text"
-            android:text="Test Name"
+            android:text=""
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageButton"
