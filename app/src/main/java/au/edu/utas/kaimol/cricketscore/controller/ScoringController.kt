@@ -7,8 +7,9 @@ import au.edu.utas.kaimol.cricketscore.databinding.FragmentScoreboardBinding
 import au.edu.utas.kaimol.cricketscore.entity.Ball
 import au.edu.utas.kaimol.cricketscore.entity.ResultType
 import au.edu.utas.kaimol.cricketscore.view.fragments.ScoreboardFragment
+import au.edu.utas.kaimol.cricketscore.viewModel.FragmentSharedViewModel
 
-class ScoringController(private val ui: FragmentScoreboardBinding) {
+class ScoringController(private val ui: FragmentScoreboardBinding, private val sharedViewModel: FragmentSharedViewModel) {
 
     fun addBall(ball: Ball){
         ScoringAdapter().saveBallToFirebase(ball)
@@ -58,7 +59,7 @@ class ScoringController(private val ui: FragmentScoreboardBinding) {
         var runsBatter1 = ui.runsBatter1.text.toString().toInt()
         val runsAdded = getRuns()
         runsBatter1 += runsAdded
-        ui.runsBatter1.text = runsBatter1.toString()
+        sharedViewModel.runsBatter1.value = runsBatter1
     }
 
     private fun ballsFacedCounter(){
@@ -66,13 +67,15 @@ class ScoringController(private val ui: FragmentScoreboardBinding) {
         when (isBallDelivered()){
             true -> {
                 ballsFaced++
-                ui.ballsFacedBatter1.text = ballsFaced.toString()
+                //ui.ballsFacedBatter1.text = ballsFaced.toString()
+                sharedViewModel.ballsFacedBatter1.value = ballsFaced
             }
             false ->{
-                ui.ballsFacedBatter1.text = ballsFaced.toString()
+                //ui.ballsFacedBatter1.text = ballsFaced.toString()
+                sharedViewModel.ballsFacedBatter1.value = ballsFaced
             }
-
         }
+        sharedViewModel.ballsFacedBatter2.value = ui.ballsFacedBatter2.text.toString().toInt()
     }
 
     private fun boundaryCounter(){
@@ -81,27 +84,29 @@ class ScoringController(private val ui: FragmentScoreboardBinding) {
         when(getBoundaryRuns()){
             4 -> {
                 boundary4++
-                ui.fourSBatter1.text = boundary4.toString()
+                sharedViewModel.fourSBatter1.value = boundary4
             }
             6 -> {
                 boundary6++
-                ui.sixSBatter1.text = boundary6.toString()
+                sharedViewModel.sixesBatter1.value = boundary6
             }
         }
+        sharedViewModel.fourSBatter2.value = ui.fourSBatter2.text.toString().toInt()
+        sharedViewModel.sixesBatter2.value = ui.sixSBatter2.text.toString().toInt()
     }
 
     private fun runsLostCounter(){
         var runsLost = ui.runsLostBowler.text.toString().toInt()
         val runsLostAdded = getRuns()
         runsLost += runsLostAdded
-        ui.runsLostBowler.text = runsLost.toString()
+        sharedViewModel.runsLost.value = runsLost
     }
 
     private fun ballsDeliveredCounter(){
         var ballsDelivered = ui.ballsDeliveredBowler.text.toString().toInt()
         if (isBallDelivered()){
             ballsDelivered++
-            ui.ballsDeliveredBowler.text = ballsDelivered.toString()
+            sharedViewModel.ballsDelivered.value = ballsDelivered
         }
     }
 
@@ -109,7 +114,7 @@ class ScoringController(private val ui: FragmentScoreboardBinding) {
         var wickets = ui.totalWicketBowler.text.toString().toInt()
         if (wicketType() != null){
             wickets++
-            ui.totalWicketBowler.text = wickets.toString()
+            sharedViewModel.totalWickets.value = wickets
         }
     }
 
