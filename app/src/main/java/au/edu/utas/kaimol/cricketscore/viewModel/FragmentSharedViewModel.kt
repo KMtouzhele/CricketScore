@@ -15,4 +15,10 @@ class FragmentSharedViewModel : ViewModel(){
     val runsLost: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
     val ballsDelivered: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
     val totalWickets: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
+
+    val totalRuns: MutableLiveData<Int> by lazy { MutableLiveData<Int>().apply { value = 0 } }
+    val totalWicketsLost : MutableLiveData<Int> by lazy { MutableLiveData<Int>().apply { value = 0 } }
+    val overCompleted: MutableLiveData<Int> by lazy { MutableLiveData<Int>().apply { value = 0 } }
+    val ballsDeliveredInOver : MutableLiveData<Int> by lazy { MutableLiveData<Int>().apply { value = 0 } }
+    val totalExtras: MutableLiveData<Int> by lazy { MutableLiveData<Int>().apply { value = 0 } }
 }

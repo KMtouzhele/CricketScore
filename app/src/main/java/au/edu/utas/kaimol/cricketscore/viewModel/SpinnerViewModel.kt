@@ -7,6 +7,9 @@ import androidx.lifecycle.ViewModel
 class SpinnerViewModel: ViewModel() {
     val battersName : MutableLiveData<MutableList<String>> by lazy { MutableLiveData<MutableList<String>>() }
     val bowlersName : MutableLiveData<MutableList<String>> by lazy { MutableLiveData<MutableList<String>>() }
+    val selectedBatter1 : MutableLiveData<String> by lazy { MutableLiveData<String>().apply { value = "No batter selected" } }
+    val selectedBatter2 : MutableLiveData<String> by lazy { MutableLiveData<String>().apply { value = "No batter selected" } }
+    val selectedBowler : MutableLiveData<String> by lazy { MutableLiveData<String>().apply { value = "No bowler selected" } }
     val spinner1SelectedPosition : MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
     val spinner2SelectedPosition : MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
     val spinner3SelectedPosition : MutableLiveData<Int> by lazy { MutableLiveData<Int>() }

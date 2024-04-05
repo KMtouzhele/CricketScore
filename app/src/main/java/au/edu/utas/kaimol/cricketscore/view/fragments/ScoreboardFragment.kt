@@ -198,7 +198,9 @@ class ScoreboardFragment : Fragment() {
         if(ui.ballsDeliveredBowler.text.toString().toInt() == 6){
             sharedViewModel.ballsDelivered.value = 0
             sharedViewModel.runsLost.value = 0
+            sharedViewModel.totalWickets.value = 0
             swapSpinner()
+            swapBatters()
             initBowler()
             refreshBowlerSpinner()
         }
@@ -213,9 +215,18 @@ class ScoreboardFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 validator.buttonStatusUpdate()
                 when(spinner){
-                    ui.spinnerBatter1 -> spinnerViewModel.spinner1SelectedPosition.value = position
-                    ui.spinnerBatter2 -> spinnerViewModel.spinner2SelectedPosition.value = position
-                    ui.spinnerBowler -> spinnerViewModel.spinner3SelectedPosition.value = position
+                    ui.spinnerBatter1 ->{
+                        spinnerViewModel.spinner1SelectedPosition.value = position
+                        spinnerViewModel.selectedBatter1.value = spinner.selectedItem.toString()
+                    }
+                    ui.spinnerBatter2 -> {
+                        spinnerViewModel.spinner2SelectedPosition.value = position
+                        spinnerViewModel.selectedBatter2.value = spinner.selectedItem.toString()
+                    }
+                    ui.spinnerBowler -> {
+                        spinnerViewModel.spinner3SelectedPosition.value = position
+                        spinnerViewModel.selectedBowler.value = spinner.selectedItem.toString()
+                    }
                 }
             }
 

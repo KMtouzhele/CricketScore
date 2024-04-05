@@ -21,13 +21,6 @@ class ScoringController(private val ui: FragmentScoreboardBinding, private val s
     }
 
 
-    fun btnStatusUpdates() {
-        ui.btnConfirm.isEnabled = !(ui.chipRuns.checkedChipId != -1
-                && ui.chipBoundaries.checkedChipId != -1
-                && ui.chipWicket.checkedChipId != -1
-                && ui.chipExtras.checkedChipId != -1)
-    }
-
     fun isBallDelivered(): Boolean{
         return ui.chipExtras.checkedChipId == -1
     }
@@ -53,6 +46,11 @@ class ScoringController(private val ui: FragmentScoreboardBinding, private val s
         runsLostCounter()
         ballsDeliveredCounter()
         wicketCounter()
+
+        totalRunsCounter()
+        totalWicketsLost()
+        totalExtras()
+        overCounter()
     }
 
     private fun runsCounter(){
@@ -60,6 +58,42 @@ class ScoringController(private val ui: FragmentScoreboardBinding, private val s
         val runsAdded = getRuns()
         runsBatter1 += runsAdded
         sharedViewModel.runsBatter1.value = runsBatter1
+    }
+
+    private fun totalRunsCounter(){
+        var totalRuns = sharedViewModel.totalRuns.value!!
+        val addedRuns = getRuns()
+        totalRuns += addedRuns
+        sharedViewModel.totalRuns.value = totalRuns
+    }
+
+    private fun totalWicketsLost(){
+        var wicketsLost = sharedViewModel.totalWicketsLost.value!!
+        if (wicketType() != null){
+            wicketsLost++
+            sharedViewModel.totalWicketsLost.value = wicketsLost
+        }
+    }
+    private fun totalExtras(){
+        var totalExtras = sharedViewModel.totalExtras.value!!
+        if (extraType() != null){
+            totalExtras++
+            sharedViewModel.totalExtras.value = totalExtras
+        }
+    }
+
+    private fun overCounter(){
+        var overCompleted = sharedViewModel.overCompleted.value!!
+        var ballsDelivered = sharedViewModel.ballsDeliveredInOver.value!!
+        if (isBallDelivered()){
+            ballsDelivered++
+            while (ballsDelivered == 6){
+                overCompleted++
+                ballsDelivered = 0
+            }
+            sharedViewModel.overCompleted.value = overCompleted
+            sharedViewModel.ballsDeliveredInOver.value = ballsDelivered
+        }
     }
 
     private fun ballsFacedCounter(){
