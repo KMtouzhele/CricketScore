@@ -110,8 +110,8 @@ class ScoreboardFragment : Fragment() {
                 refreshChipSelection()
 
                 if(scoringController.isMatchEnd()){
+                    scoringController.updateMatchResult(ball.matchId!!)
                     createEndMatchDialog()
-                    scoringController.updateMatchTimeEnd(ball.matchId!!)
                 }
             }
         }
@@ -129,7 +129,6 @@ class ScoreboardFragment : Fragment() {
         dialog.show()
 
     }
-
     private fun refreshBatterSpinner(){
         val spinner1Selected = ui.spinnerBatter1.selectedItemPosition
         spinnerViewModel.disableBatter(spinner1Selected)
@@ -173,7 +172,6 @@ class ScoreboardFragment : Fragment() {
             Log.e("ScoreboardFragment", "Error swapping batters", e)
         }
     }
-
     private fun initSpinner(batters1: MutableList<String>, batters2: MutableList<String>, bowlers: MutableList<String>){
         batterAdapter1 = SpinnerAdapter(
             requireContext(),

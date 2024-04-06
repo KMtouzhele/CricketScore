@@ -19,18 +19,4 @@ class BallDataSource {
                 throw it
             }
     }
-
-    suspend fun getBalls(batter: String): MutableList<Ball> = withContext(Dispatchers.IO) {
-        val balls = mutableListOf<Ball>()
-        FireStore().ballCollection()
-            .whereEqualTo("currentBatter", batter)
-            .get()
-            .await()
-            .forEach { document ->
-                document.toObject(Ball::class.java).let { balls.add(it) }
-            }
-        balls
-    }
-
-
 }

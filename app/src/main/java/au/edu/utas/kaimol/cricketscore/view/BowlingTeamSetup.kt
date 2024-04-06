@@ -53,7 +53,7 @@ class BowlingTeamSetup : AppCompatActivity() {
                 val match = Match(
                     battingTeam = battingTeamName,
                     bowlingTeam = bowlingTeamName,
-                    timeStart = LocalDateTime.now()
+                    matchId = "$battingTeamName vs $bowlingTeamName",
                 )
                 TeamSetupController().saveMatch(match)
                 val matchId = match.id

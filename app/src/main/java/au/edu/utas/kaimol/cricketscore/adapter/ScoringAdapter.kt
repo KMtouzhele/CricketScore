@@ -18,19 +18,16 @@ class ScoringAdapter {
         BallDataSource().add(ball)
     }
 
-
-    fun getAvailablePlayers(teamId: String): MutableList<Player> = runBlocking {
-        PlayerDataSource().getAvailablePlayers(teamId)
-    }
-
     fun updateBatterStatus(batterName: String, position: Int) {
         val player = Player(name = batterName, position = position, status = PlayerStatus.DISMISSED)
         PlayerDataSource().update(player)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun updateMatchTimeEnd(matchId: String){
+    fun updateMatchResult(matchId: String, totalRuns: Int, totalWickets: Int) {
         MatchDataSource().updateTimeEnd(matchId)
+        MatchDataSource().updateTotalRuns(matchId, totalRuns)
+        MatchDataSource().updateTotalWickets(matchId, totalWickets)
     }
 
 }

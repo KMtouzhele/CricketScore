@@ -43,8 +43,10 @@ class ScoringController(private val ui: FragmentScoreboardBinding, private val s
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun updateMatchTimeEnd(matchId: String){
-        ScoringAdapter().updateMatchTimeEnd(matchId)
+    fun updateMatchResult(matchId: String){
+        val totalWickets = sharedViewModel.totalWicketsLost.value!!
+        val totalRuns = sharedViewModel.totalRuns.value!!
+        ScoringAdapter().updateMatchResult(matchId, totalRuns, totalWickets)
     }
 
     fun isMatchEnd(): Boolean {
