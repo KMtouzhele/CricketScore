@@ -1,6 +1,8 @@
 package au.edu.utas.kaimol.cricketscore.view.fragments
 
 import android.R
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -9,23 +11,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import au.edu.utas.kaimol.cricketscore.adapter.SpinnerAdapter
 import au.edu.utas.kaimol.cricketscore.controller.ScoringController
 import au.edu.utas.kaimol.cricketscore.databinding.FragmentScoreboardBinding
 import au.edu.utas.kaimol.cricketscore.entity.Ball
 import au.edu.utas.kaimol.cricketscore.validator.EmptyScoringValidator
-import au.edu.utas.kaimol.cricketscore.view.Scoring
+import au.edu.utas.kaimol.cricketscore.view.MatchHistory
 import au.edu.utas.kaimol.cricketscore.viewModel.FragmentSharedViewModel
 import au.edu.utas.kaimol.cricketscore.viewModel.SpinnerViewModel
 import com.google.android.material.chip.ChipGroup
-import kotlinx.coroutines.DelicateCoroutinesApi
 import java.time.LocalDateTime
 
 class ScoreboardFragment : Fragment() {
@@ -49,7 +47,7 @@ class ScoreboardFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
-        val scoringController = ScoringController(ui, sharedViewModel)
+        val scoringController = ScoringController(ui, sharedViewModel, spinnerViewModel)
         val battingTeamName = activity?.intent?.getStringExtra("battingTeamName")
         val bowlingTeamName = activity?.intent?.getStringExtra("bowlingTeamName")
         val batterNameArray = mutableListOf<String>()
@@ -96,7 +94,7 @@ class ScoreboardFragment : Fragment() {
                 ball.timestamp = LocalDateTime.now()
 
                 scoringController.addBall(ball)
-                if(ball.runs % 2 == 1){
+                if(ball.runs % 2 == 1 && sharedViewModel.ballsDeliveredInOver.value!! < 5 ){
                     swapSpinner()
                     swapBatters()
                 }
@@ -106,17 +104,32 @@ class ScoreboardFragment : Fragment() {
                     initCurrentBatter()
                 }
                 overCompleted()
-
                 batterAdapter1.notifyDataSetChanged()
                 batterAdapter2.notifyDataSetChanged()
                 bowlerAdapter.notifyDataSetChanged()
-
-
                 refreshChipSelection()
 
+                if(scoringController.isMatchEnd()){
+                    createEndMatchDialog()
+                    scoringController.updateMatchTimeEnd(ball.matchId!!)
+                }
             }
         }
     }
+
+    private fun createEndMatchDialog() {
+        val builder = AlertDialog.Builder(this.requireContext())
+        builder.setTitle("Match Ended")
+        builder.setMessage("Match has ended. You can check the match in Match History")
+        builder.setPositiveButton("OK") { _, _ ->
+            val i = Intent(activity, MatchHistory::class.java)
+            startActivity(i)
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+
+    }
+
     private fun refreshBatterSpinner(){
         val spinner1Selected = ui.spinnerBatter1.selectedItemPosition
         spinnerViewModel.disableBatter(spinner1Selected)

@@ -1,6 +1,8 @@
 package au.edu.utas.kaimol.cricketscore.controller
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.viewbinding.ViewBinding
 import au.edu.utas.kaimol.cricketscore.adapter.ScoringAdapter
 import au.edu.utas.kaimol.cricketscore.databinding.FragmentScoreboardBinding
@@ -8,14 +10,15 @@ import au.edu.utas.kaimol.cricketscore.entity.Ball
 import au.edu.utas.kaimol.cricketscore.entity.ResultType
 import au.edu.utas.kaimol.cricketscore.view.fragments.ScoreboardFragment
 import au.edu.utas.kaimol.cricketscore.viewModel.FragmentSharedViewModel
+import au.edu.utas.kaimol.cricketscore.viewModel.SpinnerViewModel
 
-class ScoringController(private val ui: FragmentScoreboardBinding, private val sharedViewModel: FragmentSharedViewModel) {
+class ScoringController(private val ui: FragmentScoreboardBinding, private val sharedViewModel: FragmentSharedViewModel, private val spinnerViewModel: SpinnerViewModel) {
 
     fun addBall(ball: Ball){
         ScoringAdapter().saveBallToFirebase(ball)
         if (wicketType() != null){
             val position = ui.spinnerBatter1.selectedItemPosition
-            ScoringAdapter().updateBatterStatus(ball, ui.spinnerBatter1.selectedItem.toString(), position)
+            ScoringAdapter().updateBatterStatus(ui.spinnerBatter1.selectedItem.toString(), position)
         }
         scoreCounter()
     }
@@ -39,6 +42,17 @@ class ScoringController(private val ui: FragmentScoreboardBinding, private val s
         return runs
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun updateMatchTimeEnd(matchId: String){
+        ScoringAdapter().updateMatchTimeEnd(matchId)
+    }
+
+    fun isMatchEnd(): Boolean {
+        return ((spinnerViewModel.disabledBatters.value?.size ?: 0) == 4
+                || (spinnerViewModel.disabledBowlers.value?.size?: 0) == 4
+                || sharedViewModel.overCompleted.value == 5)
+    }
+
     private fun scoreCounter(){
         runsCounter()
         ballsFacedCounter()
@@ -52,6 +66,7 @@ class ScoringController(private val ui: FragmentScoreboardBinding, private val s
         totalExtras()
         overCounter()
     }
+
 
     private fun runsCounter(){
         var runsBatter1 = ui.runsBatter1.text.toString().toInt()
