@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import au.edu.utas.kaimol.cricketscore.entity.Match
 import au.edu.utas.kaimol.cricketscore.entity.Player
+import com.google.firebase.Timestamp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
@@ -21,19 +22,6 @@ class MatchDataSource {
                 Log.e("FIREBASE", "Error adding document", it)
             }
     }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun updateTimeEnd(matchId: String){
-        FireStore().matchCollection().document(matchId)
-            .update("timeEnd", LocalDateTime.now())
-            .addOnSuccessListener {
-                Log.d("FIREBASE", "DocumentSnapshot updated with ID: $matchId")
-            }
-            .addOnFailureListener {
-                Log.e("FIREBASE", "Error adding document", it)
-            }
-    }
-
     fun updateTotalRuns(matchId: String, totalRuns: Int) {
         FireStore().matchCollection().document(matchId)
             .update("totalRuns", totalRuns)
@@ -48,6 +36,17 @@ class MatchDataSource {
     fun updateTotalWickets(matchId: String, totalWickets: Int) {
         FireStore().matchCollection().document(matchId)
             .update("totalWickets", totalWickets)
+            .addOnSuccessListener {
+                Log.d("FIREBASE", "DocumentSnapshot updated with ID: $matchId")
+            }
+            .addOnFailureListener {
+                Log.e("FIREBASE", "Error adding document", it)
+            }
+    }
+
+    fun updateLastModified(matchId: String, lastModified: Timestamp) {
+        FireStore().matchCollection().document(matchId)
+            .update("lastModified", lastModified)
             .addOnSuccessListener {
                 Log.d("FIREBASE", "DocumentSnapshot updated with ID: $matchId")
             }

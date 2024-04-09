@@ -15,6 +15,7 @@ import android.widget.Spinner
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import au.edu.utas.kaimol.cricketscore.adapter.ScoringAdapter
 import au.edu.utas.kaimol.cricketscore.adapter.SpinnerAdapter
 import au.edu.utas.kaimol.cricketscore.controller.ScoringController
 import au.edu.utas.kaimol.cricketscore.databinding.FragmentScoreboardBinding
@@ -84,7 +85,7 @@ class ScoreboardFragment : Fragment() {
         ui.btnConfirm.setOnClickListener {
             if (battingTeamName != null && bowlingTeamName != null) {
                 val ball = Ball()
-                ball.matchId = battingTeamName + "vs" + bowlingTeamName
+                ball.matchId = "$battingTeamName vs $bowlingTeamName"
                 ball.ballsDelivered = scoringController.isBallDelivered()
                 ball.currentBatter = ui.spinnerBatter1.selectedItem.toString()
                 ball.nonBatter = ui.spinnerBatter2.selectedItem.toString()
@@ -109,8 +110,9 @@ class ScoreboardFragment : Fragment() {
                 bowlerAdapter.notifyDataSetChanged()
                 refreshChipSelection()
 
+                scoringController.updateMatchResult(ball.matchId!!)
+
                 if(scoringController.isMatchEnd()){
-                    scoringController.updateMatchResult(ball.matchId!!)
                     createEndMatchDialog()
                 }
             }

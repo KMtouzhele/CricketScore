@@ -9,6 +9,7 @@ import au.edu.utas.kaimol.cricketscore.entity.Ball
 import au.edu.utas.kaimol.cricketscore.entity.Player
 import au.edu.utas.kaimol.cricketscore.entity.PlayerStatus
 import au.edu.utas.kaimol.cricketscore.entity.TeamType
+import com.google.firebase.Timestamp
 import com.google.type.DateTime
 import kotlinx.coroutines.runBlocking
 import java.time.LocalDateTime
@@ -25,9 +26,9 @@ class ScoringAdapter {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun updateMatchResult(matchId: String, totalRuns: Int, totalWickets: Int) {
-        MatchDataSource().updateTimeEnd(matchId)
         MatchDataSource().updateTotalRuns(matchId, totalRuns)
         MatchDataSource().updateTotalWickets(matchId, totalWickets)
+        MatchDataSource().updateLastModified(matchId, Timestamp.now())
     }
 
 }

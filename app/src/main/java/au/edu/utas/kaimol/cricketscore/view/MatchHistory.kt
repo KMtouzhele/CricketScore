@@ -28,7 +28,7 @@ class MatchHistory : AppCompatActivity() {
 
 
         CoroutineScope(Dispatchers.Main).launch {
-            val matches = MatchDataSource().getMatches()
+            val matches = MatchHistoryController().getMatches()
             matchAdapter.updateMatches(matches)
         }
 
