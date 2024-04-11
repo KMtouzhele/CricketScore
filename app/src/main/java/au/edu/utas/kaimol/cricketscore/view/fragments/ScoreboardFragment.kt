@@ -25,6 +25,7 @@ import au.edu.utas.kaimol.cricketscore.view.MatchHistory
 import au.edu.utas.kaimol.cricketscore.viewModel.FragmentSharedViewModel
 import au.edu.utas.kaimol.cricketscore.viewModel.SpinnerViewModel
 import com.google.android.material.chip.ChipGroup
+import com.google.firebase.Timestamp
 import java.time.LocalDateTime
 
 class ScoreboardFragment : Fragment() {
@@ -92,7 +93,7 @@ class ScoreboardFragment : Fragment() {
                 ball.bowler = ui.spinnerBowler.selectedItem.toString()
                 ball.runs = scoringController.getRuns()
                 ball.result = scoringController.getType()
-                ball.timestamp = LocalDateTime.now()
+                ball.timestamp = Timestamp.now()
 
                 scoringController.addBall(ball)
                 if(ball.runs % 2 == 1 && sharedViewModel.ballsDeliveredInOver.value!! < 5 ){

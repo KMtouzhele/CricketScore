@@ -1,5 +1,6 @@
 package au.edu.utas.kaimol.cricketscore.entity
 
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.Exclude
 import com.google.type.DateTime
 import java.time.LocalDateTime
@@ -13,5 +14,5 @@ class Ball (
     var bowler: String? = null,
     var result: ResultType? = null,
     var runs: Int = 0,
-    var timestamp: LocalDateTime? = null
+    var timestamp: Timestamp? = null
 )
