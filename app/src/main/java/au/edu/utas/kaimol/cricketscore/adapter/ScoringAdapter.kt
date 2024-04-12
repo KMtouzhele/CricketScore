@@ -31,4 +31,5 @@ class ScoringAdapter {
         MatchDataSource().updateLastModified(matchId, Timestamp.now())
     }
 
+
 }

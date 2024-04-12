@@ -2,6 +2,7 @@ package au.edu.utas.kaimol.cricketscore.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -26,6 +27,9 @@ class Scoring : AppCompatActivity() {
 
         ViewModelProvider(this)[FragmentSharedViewModel::class.java]
         ViewModelProvider(this)[SpinnerViewModel::class.java]
+
+        val matchId = intent.getStringExtra("matchId")
+        Log.d("Scoring", "Match ID: $matchId")
 
 
         //The initial fragment should be scoreboard

@@ -9,8 +9,13 @@ import java.util.UUID
 @Parcelize //https://www.youtube.com/watch?v=HWGJbaHXZ1s
 class Player (
     @get:Exclude var id : String? = null,
-    //var uuid: UUID = UUID.randomUUID(),
     var position : Int? = null,
     var name : String? = null,
     var status: PlayerStatus? = null,
+    var teamName: String? = null,
+    var runs: Int? = null,
+    var ballsFaced: Int? = null,
+    var runsLost : Int? = null,
+    var ballsDelivered: Int? = null,
+    var totalWickets: Int? = null,
 ) : Parcelable

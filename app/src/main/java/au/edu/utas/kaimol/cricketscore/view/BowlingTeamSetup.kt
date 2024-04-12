@@ -50,13 +50,13 @@ class BowlingTeamSetup : AppCompatActivity() {
                 TeamSetupController().savePlayers(bowlers, team)
                 val bowlingTeamName = team.name
                 val battingTeamName = intent.getStringExtra("battingTeamName")
+                val matchId = "$battingTeamName vs $bowlingTeamName"
                 val match = Match(
                     battingTeam = battingTeamName,
                     bowlingTeam = bowlingTeamName,
-                    matchId = "$battingTeamName vs $bowlingTeamName",
+                    matchId = matchId,
                 )
                 TeamSetupController().saveMatch(match)
-                val matchId = match.id
 
                 val i = Intent(this, Scoring::class.java)
                 i.putExtra("matchId", matchId)

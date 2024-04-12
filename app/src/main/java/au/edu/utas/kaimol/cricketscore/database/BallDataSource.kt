@@ -40,4 +40,57 @@ class BallDataSource {
             balls
         }
     }
+
+    suspend fun getTotalRunsByCurrentBatter(matchId: String): Map<String, Int> {
+        return withContext(Dispatchers.IO){
+            val runsMap = mutableMapOf<String, Int>()
+            try {
+                val querySnapshot = FireStore().ballCollection()
+                    .whereEqualTo("matchId", matchId)
+                    .get()
+                    .await()
+                Log.d("FIREBASE", "Searching documents with matchId: $matchId")
+                for (document in querySnapshot.documents) {
+                    val ball = document.toObject(Ball::class.java)
+                    ball?.let {
+                        val currentBatter = it.currentBatter
+                        val runs = it.runs
+                        if (currentBatter != null) {
+                            runsMap[currentBatter] = (runsMap[currentBatter] ?: 0) + runs
+                        }
+                    }
+                }
+                Log.d("FIREBASE", "Successfully retrieved runs data: $runsMap")
+            } catch (e: Exception) {
+                Log.e("FIREBASE", "Error getting runs", e)
+            }
+            runsMap
+        }
+    }
+
+    suspend fun getBallsFacedByCurrentBatter(matchId: String): Map<String, Int>{
+        return withContext(Dispatchers.IO){
+            val ballsFacedMap = mutableMapOf<String, Int>()
+            try {
+                val querySnapshot = FireStore().ballCollection()
+                    .whereEqualTo("matchId", matchId)
+                    .get()
+                    .await()
+                Log.d("FIREBASE", "Searching documents with matchId: $matchId")
+                for (document in querySnapshot.documents) {
+                    val ball = document.toObject(Ball::class.java)
+                    ball?.let {
+                        val currentBatter = it.currentBatter
+                        if (currentBatter != null) {
+                            ballsFacedMap[currentBatter] = (ballsFacedMap[currentBatter] ?: 0) + 1
+                        }
+                    }
+                }
+                Log.d("FIREBASE", "Successfully retrieved balls faced data: $ballsFacedMap")
+            } catch (e: Exception) {
+                Log.e("FIREBASE", "Error getting balls faced", e)
+            }
+            ballsFacedMap
+        }
+    }
 }
