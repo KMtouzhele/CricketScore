@@ -3,15 +3,10 @@ package au.edu.utas.kaimol.cricketscore.controller
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.viewbinding.ViewBinding
 import au.edu.utas.kaimol.cricketscore.adapter.ScoringAdapter
-import au.edu.utas.kaimol.cricketscore.database.PlayerDataSource
 import au.edu.utas.kaimol.cricketscore.databinding.FragmentScoreboardBinding
 import au.edu.utas.kaimol.cricketscore.entity.Ball
-import au.edu.utas.kaimol.cricketscore.entity.Player
 import au.edu.utas.kaimol.cricketscore.entity.ResultType
-import au.edu.utas.kaimol.cricketscore.entity.TeamType
-import au.edu.utas.kaimol.cricketscore.view.fragments.ScoreboardFragment
 import au.edu.utas.kaimol.cricketscore.viewModel.FragmentSharedViewModel
 import au.edu.utas.kaimol.cricketscore.viewModel.SpinnerViewModel
 
@@ -20,8 +15,10 @@ class ScoringController(private val ui: FragmentScoreboardBinding, private val s
     fun addBall(ball: Ball){
         ScoringAdapter().saveBallToFirebase(ball)
         if (wicketType() != null){
-            val position = ui.spinnerBatter1.selectedItemPosition
-            ScoringAdapter().updateBatterStatus(ui.spinnerBatter1.selectedItem.toString(), position)
+            ScoringAdapter().updateDismissedBatter(ui.spinnerBatter1.selectedItem.toString())
+        } else {
+            ScoringAdapter().updatePlayingPlayers(ui.spinnerBatter1.selectedItem.toString())
+            ScoringAdapter().updatePlayingPlayers(ui.spinnerBowler.selectedItem.toString())
         }
         scoreCounter()
     }
@@ -257,22 +254,4 @@ class ScoringController(private val ui: FragmentScoreboardBinding, private val s
         }
         return type
     }
-
-    fun updateOutPlayerScore(playerName: String, teamType: TeamType) {
-        val player = Player()
-        when (teamType) {
-            TeamType.BATTING -> {
-                player.runs = sharedViewModel.runsBatter1.value!!
-                player.ballsFaced = sharedViewModel.ballsFacedBatter1.value!!
-            }
-
-            TeamType.BOWLING -> {
-                player.runsLost = sharedViewModel.runsLost.value!!
-                player.ballsDelivered = sharedViewModel.ballsDelivered.value!!
-                player.totalWickets = sharedViewModel.totalWickets.value!!
-            }
-        }
-        PlayerDataSource().updateScores(player)
-    }
-
 }

@@ -56,15 +56,4 @@ class SpinnerAdapter<T> (
         return view
     }
 
-//    fun disableItem(position: Int) {
-//        val disabledSet = viewModel.disabledItems.value ?: HashSet()
-//        disabledSet.add(position)
-//        viewModel.disabledItems.value = disabledSet
-//    }
-//
-//    fun enableItem(position: Int) {
-//        val disabledSet = viewModel.disabledItems.value ?: HashSet()
-//        disabledSet.remove(position)
-//        viewModel.disabledItems.value = disabledSet
-//    }
 }

@@ -8,20 +8,16 @@ import au.edu.utas.kaimol.cricketscore.database.PlayerDataSource
 import au.edu.utas.kaimol.cricketscore.entity.Ball
 import au.edu.utas.kaimol.cricketscore.entity.Player
 import au.edu.utas.kaimol.cricketscore.entity.PlayerStatus
-import au.edu.utas.kaimol.cricketscore.entity.TeamType
 import com.google.firebase.Timestamp
-import com.google.type.DateTime
-import kotlinx.coroutines.runBlocking
-import java.time.LocalDateTime
 
 class ScoringAdapter {
     fun saveBallToFirebase (ball: Ball) {
         BallDataSource().add(ball)
     }
 
-    fun updateBatterStatus(batterName: String, position: Int) {
-        val player = Player(name = batterName, position = position, status = PlayerStatus.DISMISSED)
-        PlayerDataSource().update(player)
+    fun updateDismissedBatter(batterName: String) {
+        val player = Player(name = batterName, status = PlayerStatus.DISMISSED)
+        PlayerDataSource().updatePlayerStatus(player)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -29,6 +25,11 @@ class ScoringAdapter {
         MatchDataSource().updateTotalRuns(matchId, totalRuns)
         MatchDataSource().updateTotalWickets(matchId, totalWickets)
         MatchDataSource().updateLastModified(matchId, Timestamp.now())
+    }
+
+    fun updatePlayingPlayers(batterName: String) {
+        val player = Player(name = batterName, status = PlayerStatus.PLAYING)
+        PlayerDataSource().updatePlayerStatus(player)
     }
 
 

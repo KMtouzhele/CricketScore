@@ -1,18 +1,10 @@
 package au.edu.utas.kaimol.cricketscore.database
 
-import android.content.Context
 import android.util.Log
 import au.edu.utas.kaimol.cricketscore.entity.Player
-import au.edu.utas.kaimol.cricketscore.entity.PlayerStatus
-import au.edu.utas.kaimol.cricketscore.entity.Team
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
 class PlayerDataSource {
     fun add(player: Player) {
@@ -26,9 +18,9 @@ class PlayerDataSource {
             }
     }
 
-    fun update(player: Player) {
+    fun updatePlayerStatus(player: Player) {
         FireStore().playerCollection().document(player.name!!)
-            .set(player)
+            .update("status", player.status.toString())
             .addOnSuccessListener {
                 Log.d("FIREBASE", "DocumentSnapshot successfully updated!")
             }
@@ -37,20 +29,34 @@ class PlayerDataSource {
             }
     }
 
-    fun updateScores(player: Player){
-        FireStore().playerCollection().document(player.id!!)
-            .update("runs", player.runs,
-                "ballsFaced", player.ballsFaced,
-                "runsLost", player.runsLost,
-                "ballsDelivered", player.ballsDelivered,
-                "totalWickets", player.totalWickets,
-                "status", player.status
-            )
+    fun updatePlayerName(player:Player){
+        FireStore().playerCollection().document(player.name!!)
+            .update("id",player.name, "name", player.name)
             .addOnSuccessListener {
-                Log.d("FIREBASE", "Player scores successfully updated!")
+                Log.d("FIREBASE", "DocumentSnapshot successfully updated!")
             }
             .addOnFailureListener {
-                Log.e("FIREBASE", "Error updating player scores", it)
+                Log.e("FIREBASE", "Error updating document", it)
             }
+    }
+
+
+    suspend fun getPlayerByTeamName(teamName: String): MutableList<Player>{
+        return withContext(Dispatchers.IO){
+            val players = mutableListOf<Player>()
+            try {
+                val querySnapshot = FireStore().playerCollection()
+                    .whereEqualTo("teamName", teamName)
+                    .get()
+                    .await()
+                for (document in querySnapshot.documents) {
+                    val player = document.toObject(Player::class.java)
+                    player?.let { players.add(it) }
+                }
+            } catch (e: Exception) {
+                Log.e("FIREBASE", "Error getting players", e)
+            }
+            players
+        }
     }
 }
