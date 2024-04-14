@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
+import au.edu.utas.kaimol.cricketscore.database.PlayerDataSource
 import au.edu.utas.kaimol.cricketscore.databinding.PlayerInfoListItemBinding
 import au.edu.utas.kaimol.cricketscore.entity.Player
 import au.edu.utas.kaimol.cricketscore.entity.PlayerStatus
@@ -40,6 +41,7 @@ class PlayerInfoContainerAdapter(private var players: MutableList<Player>) : Rec
             holder.ui.editTxtPlayerName.isGone = true
             holder.ui.txtInfoPlayerName.isGone = false
             holder.ui.btnSave.isGone = true
+            PlayerDataSource().updatePlayerName(player)
         }
     }
     @SuppressLint("NotifyDataSetChanged")
@@ -48,7 +50,7 @@ class PlayerInfoContainerAdapter(private var players: MutableList<Player>) : Rec
         notifyDataSetChanged()
     }
 
-    fun canBeEdited(player: Player): Boolean {
+    private fun canBeEdited(player: Player): Boolean {
         return when(player.status){
             PlayerStatus.AVAILABLE -> true
             PlayerStatus.PLAYING -> false

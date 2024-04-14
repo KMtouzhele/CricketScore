@@ -15,10 +15,10 @@ class ScoringController(private val ui: FragmentScoreboardBinding, private val s
     fun addBall(ball: Ball){
         ScoringAdapter().saveBallToFirebase(ball)
         if (wicketType() != null){
-            ScoringAdapter().updateDismissedBatter(ui.spinnerBatter1.selectedItem.toString())
+            ScoringAdapter().updateDismissedPlayer(spinnerViewModel.selectedBatter1.value!!, spinnerViewModel.spinner1SelectedPosition.value!!)
         } else {
-            ScoringAdapter().updatePlayingPlayers(ui.spinnerBatter1.selectedItem.toString())
-            ScoringAdapter().updatePlayingPlayers(ui.spinnerBowler.selectedItem.toString())
+            ScoringAdapter().updatePlayingPlayers(spinnerViewModel.selectedBatter1.value!!, spinnerViewModel.spinner1SelectedPosition.value!!)
+            ScoringAdapter().updatePlayingPlayers(spinnerViewModel.selectedBowler.value!!, spinnerViewModel.spinner3SelectedPosition.value!!)
         }
         scoreCounter()
     }

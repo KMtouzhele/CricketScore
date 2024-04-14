@@ -15,8 +15,13 @@ class ScoringAdapter {
         BallDataSource().add(ball)
     }
 
-    fun updateDismissedBatter(batterName: String) {
-        val player = Player(name = batterName, status = PlayerStatus.DISMISSED)
+    fun updateDismissedPlayer(playerName: String, playerPosition: Int) {
+        val player = Player(name = playerName, position = playerPosition, status = PlayerStatus.DISMISSED)
+        PlayerDataSource().updatePlayerStatus(player)
+    }
+
+    fun updatePlayingPlayers(playerName: String, playerPosition: Int) {
+        val player = Player(name = playerName, position = playerPosition, status = PlayerStatus.PLAYING)
         PlayerDataSource().updatePlayerStatus(player)
     }
 
@@ -27,9 +32,14 @@ class ScoringAdapter {
         MatchDataSource().updateLastModified(matchId, Timestamp.now())
     }
 
-    fun updatePlayingPlayers(batterName: String) {
-        val player = Player(name = batterName, status = PlayerStatus.PLAYING)
-        PlayerDataSource().updatePlayerStatus(player)
+    suspend fun getPlayerNamesByTeamName(teamName: String): MutableList<String> {
+        val players = PlayerDataSource().getPlayerByTeamName(teamName)
+        val sortedPlayers = players.sortedBy { it.position }
+        val playerNames = mutableListOf<String>()
+        for (player in sortedPlayers) {
+            playerNames.add(player.name!!)
+        }
+        return playerNames
     }
 
 

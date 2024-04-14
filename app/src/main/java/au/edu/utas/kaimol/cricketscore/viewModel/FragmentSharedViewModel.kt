@@ -2,6 +2,7 @@ package au.edu.utas.kaimol.cricketscore.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import au.edu.utas.kaimol.cricketscore.entity.Player
 
 class FragmentSharedViewModel : ViewModel(){
     val runsBatter1: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
@@ -21,4 +22,5 @@ class FragmentSharedViewModel : ViewModel(){
     val overCompleted: MutableLiveData<Int> by lazy { MutableLiveData<Int>().apply { value = 0 } }
     val ballsDeliveredInOver : MutableLiveData<Int> by lazy { MutableLiveData<Int>().apply { value = 0 } }
     val totalExtras: MutableLiveData<Int> by lazy { MutableLiveData<Int>().apply { value = 0 } }
+
 }

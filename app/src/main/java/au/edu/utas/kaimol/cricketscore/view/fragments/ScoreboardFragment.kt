@@ -29,6 +29,10 @@ import au.edu.utas.kaimol.cricketscore.viewModel.FragmentSharedViewModel
 import au.edu.utas.kaimol.cricketscore.viewModel.SpinnerViewModel
 import com.google.android.material.chip.ChipGroup
 import com.google.firebase.Timestamp
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
 class ScoreboardFragment : Fragment() {
@@ -55,24 +59,28 @@ class ScoreboardFragment : Fragment() {
         val scoringController = ScoringController(ui, sharedViewModel, spinnerViewModel)
         val battingTeamName = activity?.intent?.getStringExtra("battingTeamName")
         val bowlingTeamName = activity?.intent?.getStringExtra("bowlingTeamName")
-        val batterNameArray = mutableListOf<String>()
-        val bowlerNameArray = mutableListOf<String>()
+        val spinnerPlaceholder = mutableListOf("Loading...", "Loading...", "Loading...", "Loading...", "Loading...","Loading...")
 
-        for (i in 1..5){
-            val batterName = activity?.intent?.getStringExtra("batter$i")
-            batterNameArray.add(batterName.toString())
+        initSpinner(
+            spinnerPlaceholder,
+            spinnerPlaceholder,
+            spinnerPlaceholder
+        )
+
+        CoroutineScope(Dispatchers.Main).launch {
+            val battersName1 = ScoringAdapter().getPlayerNamesByTeamName(battingTeamName!!)
+            battersName1.add(0, prompt)
+            val battersName2 = battersName1.toMutableList()
+            val bowlersName = ScoringAdapter().getPlayerNamesByTeamName(bowlingTeamName!!)
+            bowlersName.add(0, prompt)
+            initSpinner(
+                battersName1,
+                battersName2,
+                bowlersName
+            )
         }
-        batterNameArray.add(0,prompt)
 
-        val batterNameArray2 = batterNameArray.toMutableList()
 
-        for(i in 1..5){
-            val bowlerName = activity?.intent?.getStringExtra("bowler$i")
-            bowlerNameArray.add(bowlerName.toString())
-        }
-        bowlerNameArray.add(0,prompt)
-
-        initSpinner(batterNameArray, batterNameArray2, bowlerNameArray)
         initViewModelObservations()
 
         val validator = EmptyScoringValidator(ui)
@@ -197,6 +205,10 @@ class ScoreboardFragment : Fragment() {
         ui.spinnerBatter1.adapter = batterAdapter1
         ui.spinnerBatter2.adapter = batterAdapter2
         ui.spinnerBowler.adapter = bowlerAdapter
+
+        ui.spinnerBatter1.setSelection(spinnerViewModel.spinner1SelectedPosition.value ?: 0)
+        ui.spinnerBatter2.setSelection(spinnerViewModel.spinner2SelectedPosition.value ?: 0)
+        ui.spinnerBowler.setSelection(spinnerViewModel.spinner3SelectedPosition.value ?: 0)
     }
     private fun refreshChipSelection(){
         ui.chipRuns.clearCheck()

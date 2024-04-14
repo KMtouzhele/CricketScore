@@ -36,17 +36,4 @@ class TeamDataSource {
             }
     }
 
-    suspend fun get(id: String) : Team = suspendCancellableCoroutine{ continuation ->
-        FireStore().teamCollection()
-            .document(id)
-            .get()
-            .addOnSuccessListener {
-                val team = it.toObject(Team::class.java)!!
-                continuation.resume(team)
-            }
-            .addOnFailureListener {
-                Log.e("FIREBASE", "Error getting document", it)
-                continuation.resumeWithException(it)
-            }
-    }
 }
