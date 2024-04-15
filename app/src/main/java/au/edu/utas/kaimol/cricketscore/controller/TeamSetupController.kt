@@ -1,7 +1,8 @@
 package au.edu.utas.kaimol.cricketscore.controller
 
-import android.os.Build
-import androidx.annotation.RequiresApi
+import android.content.Context
+import android.view.View
+import android.widget.Toast
 import androidx.viewbinding.ViewBinding
 import au.edu.utas.kaimol.cricketscore.adapter.TeamSetupAdapter
 import au.edu.utas.kaimol.cricketscore.databinding.ActivityBattingTeamSetupBinding
@@ -11,11 +12,8 @@ import au.edu.utas.kaimol.cricketscore.entity.Match
 import au.edu.utas.kaimol.cricketscore.entity.Player
 import au.edu.utas.kaimol.cricketscore.entity.PlayerStatus
 import au.edu.utas.kaimol.cricketscore.entity.Team
-import au.edu.utas.kaimol.cricketscore.entity.TeamType
-import kotlinx.coroutines.runBlocking
-import java.time.LocalDateTime
 
-class TeamSetupController {
+class TeamSetupController() {
 
     fun saveMatch(match: Match) {
         TeamSetupAdapter().saveMatchToFirebase(match)
@@ -61,5 +59,9 @@ class TeamSetupController {
             batters.sortBy { it.position }
         }
         return batters
+    }
+
+    fun createValidationToast(context: Context, message: String, duration: Int = Toast.LENGTH_SHORT){
+        Toast.makeText(context, message, duration).show()
     }
 }

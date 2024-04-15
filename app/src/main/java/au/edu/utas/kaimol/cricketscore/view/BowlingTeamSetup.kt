@@ -20,8 +20,6 @@ import java.time.LocalDateTime
 private val playerIndexes = mutableListOf(1, 2, 3, 4, 5)
 class BowlingTeamSetup : AppCompatActivity() {
     private lateinit var ui : ActivityBowlingTeamSetupBinding
-
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,32 +32,43 @@ class BowlingTeamSetup : AppCompatActivity() {
         val batter4Name = intent.getStringExtra("batter4")
         val batter5Name = intent.getStringExtra("batter5")
 
+        val teamSetupController = TeamSetupController()
+        val teamSetupValidator = EmptySetupValidator()
+
         ui.bowlersInfoList.adapter = PlayerContainerAdapter(playerIndexes)
         ui.bowlersInfoList.layoutManager = LinearLayoutManager(this)
         ui.btnBack.setOnClickListener {
             finish()
         }
         ui.btnMatchStarts.setOnClickListener {
-            if(!EmptySetupValidator().teamSetupValidation(ui)){
+            if(teamSetupValidator.teamSetupValidation(ui)){
+                teamSetupController.createValidationToast(
+                    this,
+                    "Please fill all the fields."
+                )
+            } else{
                 val teamName = ui.txtBowlingTeamName.text.toString()
-                val bowlers = TeamSetupController().getBowlersFromView(ui)
+                val bowlers = teamSetupController.getBowlersFromView(ui)
                 val team = Team(name = teamName, teamType = TeamType.BOWLING)
 
-                TeamSetupController().saveTeam(team)
+                teamSetupController.saveTeam(team)
 
-                TeamSetupController().savePlayers(bowlers, team)
+                teamSetupController.savePlayers(bowlers, team)
                 val bowlingTeamName = team.name
                 val battingTeamName = intent.getStringExtra("battingTeamName")
                 Log.d("BowlingTeamSetup", "battingTeamName: $battingTeamName")
                 Log.d("BowlingTeamSetup", "bowlingTeamName: $bowlingTeamName")
+
+                //get match from intent and save it to Firebase
                 val matchId = "$battingTeamName vs $bowlingTeamName"
                 val match = Match(
                     battingTeam = battingTeamName,
                     bowlingTeam = bowlingTeamName,
                     matchId = matchId,
                 )
-                TeamSetupController().saveMatch(match)
+                teamSetupController.saveMatch(match)
 
+                //pass intent to Scoring activity
                 val i = Intent(this, Scoring::class.java)
                 i.putExtra("matchId", matchId)
                 i.putExtra("battingTeamName", battingTeamName)
@@ -73,9 +82,6 @@ class BowlingTeamSetup : AppCompatActivity() {
                     i.putExtra("bowler${index + 1}", bowlers[index].name)
                 }
                 startActivity(i)
-
-            } else{
-                Log.d("Invalid", "Text fields are empty. Validation failed.")
             }
 
 
