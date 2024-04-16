@@ -26,6 +26,7 @@ class MatchDetail : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.Main).launch{
             val balls = BallDataSource().getByMatchId(matchId)
+            balls.sortBy { it.timestamp }
             ballAdapter.updateBalls(balls)
         }
     }

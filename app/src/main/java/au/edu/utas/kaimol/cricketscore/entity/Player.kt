@@ -15,4 +15,7 @@ class Player (
     var teamName: String? = null,
     var runs: Int? = null,
     var ballsFaced: Int? = null,
+    var runsLost: Int? = null,
+    var totalWickets: Int? = null,
+    var ballsDelivered: Int? = null,
 ) : Parcelable

@@ -18,11 +18,8 @@ import androidx.lifecycle.Observer
 import au.edu.utas.kaimol.cricketscore.adapter.ScoringAdapter
 import au.edu.utas.kaimol.cricketscore.adapter.SpinnerAdapter
 import au.edu.utas.kaimol.cricketscore.controller.ScoringController
-import au.edu.utas.kaimol.cricketscore.database.PlayerDataSource
 import au.edu.utas.kaimol.cricketscore.databinding.FragmentScoreboardBinding
 import au.edu.utas.kaimol.cricketscore.entity.Ball
-import au.edu.utas.kaimol.cricketscore.entity.Player
-import au.edu.utas.kaimol.cricketscore.entity.PlayerStatus
 import au.edu.utas.kaimol.cricketscore.validator.EmptyScoringValidator
 import au.edu.utas.kaimol.cricketscore.view.MatchHistory
 import au.edu.utas.kaimol.cricketscore.viewModel.FragmentSharedViewModel
@@ -31,16 +28,16 @@ import com.google.android.material.chip.ChipGroup
 import com.google.firebase.Timestamp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
 
 class ScoreboardFragment : Fragment() {
     private lateinit var batterAdapter1 : SpinnerAdapter<String>
     private lateinit var batterAdapter2 : SpinnerAdapter<String>
     private lateinit var bowlerAdapter : SpinnerAdapter<String>
     private lateinit var ui : FragmentScoreboardBinding
-    private var prompt: String = "Select"
+    private var selectionStrikerPrompt: String = "- Striker -"
+    private var selectionNonStrikerPrompt: String = "- Non-Striker -"
+    private var selectBowlerPrompt: String = "- Bowler -"
     private val sharedViewModel : FragmentSharedViewModel by activityViewModels()
     private val spinnerViewModel: SpinnerViewModel by activityViewModels()
 
@@ -68,11 +65,15 @@ class ScoreboardFragment : Fragment() {
         )
 
         CoroutineScope(Dispatchers.Main).launch {
-            val battersName1 = ScoringAdapter().getPlayerNamesByTeamName(battingTeamName!!)
-            battersName1.add(0, prompt)
-            val battersName2 = battersName1.toMutableList()
+            val battersName1 = ScoringAdapter().getPlayerNamesByTeamName(battingTeamName!!).toMutableList()
+            battersName1.add(0, selectionStrikerPrompt)
+
+            val battersName2 = ScoringAdapter().getPlayerNamesByTeamName(battingTeamName).toMutableList()
+            battersName2.add(0, selectionNonStrikerPrompt)
+
             val bowlersName = ScoringAdapter().getPlayerNamesByTeamName(bowlingTeamName!!)
-            bowlersName.add(0, prompt)
+            bowlersName.add(0, selectBowlerPrompt)
+
             initSpinner(
                 battersName1,
                 battersName2,

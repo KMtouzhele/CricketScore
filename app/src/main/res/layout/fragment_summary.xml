@@ -31,17 +31,20 @@
             <TextView
                 android:id="@+id/txtExtraValue"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="156dp"
+                android:layout_marginTop="8dp"
+                android:background="#191919"
                 android:gravity="center|center_vertical"
                 android:text="10"
                 android:textAlignment="gravity"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                android:textColor="#EAEAEA" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/fieldRunRate"
             android:layout_width="0dp"
-            android:layout_height="135dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="@+id/fieldBattingScore"
@@ -59,11 +62,14 @@
             <TextView
                 android:id="@+id/txtRunRateValue"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="156dp"
+                android:layout_marginTop="8dp"
+                android:background="#191919"
                 android:gravity="center|center_vertical"
                 android:text="7.636"
                 android:textAlignment="gravity"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                android:textColor="#EAEAEA" />
         </LinearLayout>
 
         <LinearLayout
@@ -87,17 +93,20 @@
             <TextView
                 android:id="@+id/txtCurrentOver"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="156dp"
+                android:layout_marginTop="8dp"
+                android:background="#191919"
                 android:gravity="center|center_vertical"
                 android:text="5.3"
                 android:textAlignment="gravity"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                android:textColor="#EAEAEA" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/fieldBattingScore"
             android:layout_width="0dp"
-            android:layout_height="223dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="@+id/battingTeam"
@@ -114,16 +123,19 @@
             <TextView
                 android:id="@+id/txtBattingSocre"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="156dp"
+                android:layout_marginTop="8dp"
+                android:background="#191919"
                 android:gravity="center|center_vertical"
                 android:text="2 / 42"
+                android:textAlignment="gravity"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-                android:textAlignment="gravity" />
+                android:textColor="#EAEAEA" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/bowlingTeam"
-            android:layout_width="185dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="24dp"
@@ -131,7 +143,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/battingTeam"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@+id/battingTeam">
 
             <TextView
                 android:id="@+id/txtBowling"
@@ -146,12 +158,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="##########"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtCurrentBowler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Current Bowler"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textStyle="bold" />
@@ -160,8 +174,9 @@
                 android:id="@+id/bowler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="TextView"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
         </LinearLayout>
 
         <LinearLayout
@@ -169,6 +184,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toStartOf="@+id/bowlingTeam"
@@ -188,12 +204,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="##########"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtCurrentBatter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Current Batter"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textStyle="bold" />
@@ -202,15 +220,17 @@
                 android:id="@+id/currentBatter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#F5E7FF"
                 android:text="TextView"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
                 android:id="@+id/nonBatter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         </LinearLayout>
 

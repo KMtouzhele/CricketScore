@@ -87,6 +87,7 @@
                         android:id="@+id/spinnerBatter1"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
+                        android:layout_marginLeft="16dp"
                         android:spinnerMode="dropdown"
                         android:textAlignment="center" />
 
@@ -94,6 +95,8 @@
                         android:id="@+id/runsBatter1"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
+                        android:layout_marginLeft="16dp"
+                        android:background="#F5E7FF"
                         android:gravity="center|center_vertical"
                         android:text="0"
                         android:textAlignment="gravity" />
@@ -102,6 +105,8 @@
                         android:id="@+id/ballsFacedBatter1"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
+                        android:layout_marginLeft="16dp"
+                        android:background="#F5E7FF"
                         android:gravity="center|center_vertical"
                         android:text="0"
                         android:textAlignment="gravity" />
@@ -110,6 +115,8 @@
                         android:id="@+id/fourSBatter1"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
+                        android:layout_marginLeft="16dp"
+                        android:background="#F5E7FF"
                         android:gravity="center|center_vertical"
                         android:text="0"
                         android:textAlignment="gravity" />
@@ -118,6 +125,8 @@
                         android:id="@+id/sixSBatter1"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
+                        android:layout_marginLeft="16dp"
+                        android:background="#F5E7FF"
                         android:gravity="center|center_vertical"
                         android:text="0"
                         android:textAlignment="gravity" />
@@ -136,12 +145,15 @@
                         android:id="@+id/spinnerBatter2"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
+                        android:layout_marginLeft="16dp"
+                        android:background="?android:attr/colorBackground"
                         android:textAlignment="center" />
 
                     <TextView
                         android:id="@+id/runsBatter2"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
+                        android:layout_marginLeft="16dp"
                         android:gravity="center|center_vertical"
                         android:text="0"
                         android:textAlignment="gravity" />
@@ -150,6 +162,7 @@
                         android:id="@+id/ballsFacedBatter2"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
+                        android:layout_marginLeft="16dp"
                         android:gravity="center|center_vertical"
                         android:text="0"
                         android:textAlignment="gravity" />
@@ -158,6 +171,7 @@
                         android:id="@+id/fourSBatter2"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
+                        android:layout_marginLeft="16dp"
                         android:gravity="center|center_vertical"
                         android:text="0"
                         android:textAlignment="gravity" />
@@ -166,6 +180,7 @@
                         android:id="@+id/sixSBatter2"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
+                        android:layout_marginLeft="16dp"
                         android:gravity="center|center_vertical"
                         android:text="0"
                         android:textAlignment="gravity" />
