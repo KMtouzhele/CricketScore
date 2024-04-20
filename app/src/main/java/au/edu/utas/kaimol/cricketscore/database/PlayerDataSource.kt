@@ -75,4 +75,15 @@ class PlayerDataSource {
             players
         }
     }
+
+    fun deletePlayer(player: Player){
+            FireStore().playerCollection().document(player.id!!)
+                .delete()
+                .addOnSuccessListener {
+                    Log.d("FIREBASE", "DocumentSnapshot successfully deleted!")
+                }
+                .addOnFailureListener {
+                    Log.e("FIREBASE", "Error deleting document", it)
+        }
+    }
 }

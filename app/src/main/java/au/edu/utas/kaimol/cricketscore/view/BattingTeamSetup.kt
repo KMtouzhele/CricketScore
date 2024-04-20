@@ -1,8 +1,11 @@
 package au.edu.utas.kaimol.cricketscore.view
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import au.edu.utas.kaimol.cricketscore.adapter.PlayerContainerAdapter
 import au.edu.utas.kaimol.cricketscore.controller.TeamSetupController
@@ -10,6 +13,7 @@ import au.edu.utas.kaimol.cricketscore.databinding.ActivityBattingTeamSetupBindi
 import au.edu.utas.kaimol.cricketscore.entity.Team
 import au.edu.utas.kaimol.cricketscore.entity.TeamType
 import au.edu.utas.kaimol.cricketscore.validator.EmptySetupValidator
+import kotlin.math.min
 
 private val playerIndexes = mutableListOf(1, 2, 3, 4, 5)
 class BattingTeamSetup : AppCompatActivity() {

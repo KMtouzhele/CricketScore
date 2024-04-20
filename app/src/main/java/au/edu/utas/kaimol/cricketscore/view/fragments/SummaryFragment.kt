@@ -1,6 +1,7 @@
 package au.edu.utas.kaimol.cricketscore.view.fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -59,6 +60,25 @@ class SummaryFragment : Fragment() {
         val runRate = totalRuns.toInt() / (totalBalls / (overCompleted.toInt() + 1 ) ).toFloat()
         ui.txtRunRateValue.text = runRate.toString()
 
+        //Share button
+        val sharedText : String = "Sharing a match progress with you \n" +
+                "Batting Team: ${ui.battingTeamName.text}\n" +
+                "Bowling Team: ${ui.bowlingTeamName.text}\n" +
+                "Current Batter: ${ui.currentBatter.text}\n" +
+                "Non-Striker: ${ui.nonBatter.text}\n" +
+                "Bowler: ${ui.bowler.text}\n" +
+                "Batting Score: ${ui.txtBattingSocre.text}\n" +
+                "Current Over: ${ui.txtCurrentOver.text}\n" +
+                "Extras: ${ui.txtExtraValue.text}\n" +
+                "Run Rate: ${ui.txtRunRateValue.text}"
+        ui.btnShare.setOnClickListener {
+            val sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, sharedText)
+                type = "text/plain"
+            }
+            startActivity(Intent.createChooser(sendIntent, "Share via..."))
+        }
     }
 
 

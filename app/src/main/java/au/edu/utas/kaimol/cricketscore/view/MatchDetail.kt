@@ -3,7 +3,6 @@ package au.edu.utas.kaimol.cricketscore.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import au.edu.utas.kaimol.cricketscore.R
 import au.edu.utas.kaimol.cricketscore.adapter.BallContainerAdapter
 import au.edu.utas.kaimol.cricketscore.database.BallDataSource
 import au.edu.utas.kaimol.cricketscore.databinding.ActivityMatchDetailBinding
