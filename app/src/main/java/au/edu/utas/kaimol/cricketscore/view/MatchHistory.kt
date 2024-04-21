@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.LinearLayoutManager
 import au.edu.utas.kaimol.cricketscore.adapter.HistoryContainerAdapter
 import au.edu.utas.kaimol.cricketscore.controller.MatchHistoryController
@@ -29,7 +30,14 @@ class MatchHistory : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.Main).launch {
             val matches = MatchHistoryController().getMatches()
-            matchAdapter.updateMatches(matches)
+            if (matches.isEmpty()){
+                ui.promptHistory.text = "No matches found."
+            } else {
+                matchAdapter.updateMatches(matches)
+                val matchCount = matches.size
+                ui.promptHistory.text = "$matchCount matches found."
+            }
+
         }
 
 

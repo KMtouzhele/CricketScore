@@ -56,10 +56,12 @@ class IndividualFragment : Fragment() {
                         val batters = runsMap.map { (batter, runs) ->
                             Player(name = batter, runs = runs, ballsFaced = ballsFacedMap[batter] ?: 0)
                         }.toMutableList()
-                        for (batter in batters) {
-                            Log.d("IndividualFragment", "Batter: ${batter.name}, Runs: ${batter.runs}, Balls Faced: ${batter.ballsFaced}")
+                        if (batters.isEmpty()){
+                            ui.promptIndividual.text = "Match not started yet."
+                        } else {
+                            ui.promptIndividual.text = "${batters.size} batter(s) have been played."
+                            batterAdapter.updateBatters(batters)
                         }
-                        batterAdapter.updateBatters(batters)
                     }
                 } else {
                     ui.IndividualList.adapter = bowlerAdapter
@@ -75,7 +77,13 @@ class IndividualFragment : Fragment() {
                                 ballsDelivered = ballsDeliveredMap[bowler] ?: 0,
                                 totalWickets = wicketsMap[bowler] ?: 0)
                         }.toMutableList()
-                        bowlerAdapter.updateBowlers(bowlers)
+                        if (bowlers.isEmpty()){
+                            ui.promptIndividual.text = "Match not started yet."
+                        } else {
+                            ui.promptIndividual.text = "${bowlers.size} bowler(s) have played."
+                            bowlerAdapter.updateBowlers(bowlers)
+                        }
+
                     }
                 }
             }

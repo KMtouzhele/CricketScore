@@ -267,9 +267,37 @@ class ScoreboardFragment : Fragment() {
 
     }
     private fun setChipGroupListener(chip: ChipGroup, validator: EmptyScoringValidator){
-        chip.setOnCheckedStateChangeListener() { _, _ ->
-            validator.buttonStatusUpdate()
+        chip.setOnCheckedStateChangeListener() { chipGroup, checkedId ->
+            if (chipGroup.checkedChipId != View.NO_ID) {
+                when (chipGroup) {
+                    ui.chipRuns -> {
+                        ui.chipBoundaries.clearCheck()
+                        ui.chipWicket.clearCheck()
+                        ui.chipExtras.clearCheck()
+                    }
+
+                    ui.chipBoundaries -> {
+                        ui.chipRuns.clearCheck()
+                        ui.chipWicket.clearCheck()
+                        ui.chipExtras.clearCheck()
+                    }
+
+                    ui.chipWicket -> {
+                        ui.chipRuns.clearCheck()
+                        ui.chipBoundaries.clearCheck()
+                        ui.chipExtras.clearCheck()
+                    }
+
+                    ui.chipExtras -> {
+                        ui.chipRuns.clearCheck()
+                        ui.chipBoundaries.clearCheck()
+                        ui.chipWicket.clearCheck()
+                    }
+                }
+            }
+
         }
+            validator.buttonStatusUpdate()
     }
 
     private fun initViewModelObservations(){

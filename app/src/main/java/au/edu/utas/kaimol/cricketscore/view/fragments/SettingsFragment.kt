@@ -68,7 +68,12 @@ class SettingsFragment : Fragment() {
 
         CoroutineScope(Dispatchers.Main).launch {
             val players = PlayerDataSource().getPlayerByTeamName(battingTeamName!!)
-            playerInfoAdapter.updatePlayers(players)
+            if (players.isEmpty()){
+                ui.promptSettings.text = "No players found."
+            } else {
+                ui.promptSettings.text = "${players.size} players loaded."
+                playerInfoAdapter.updatePlayers(players)
+            }
         }
 
         ui.btnNewMatch.setOnClickListener {

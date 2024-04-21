@@ -19,14 +19,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toTopOf="@+id/create_match"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/promptHistory">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/historyList"
@@ -34,6 +35,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp" />
     </ScrollView>
+
+    <TextView
+        android:id="@+id/promptHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Loading..."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/create_match"
