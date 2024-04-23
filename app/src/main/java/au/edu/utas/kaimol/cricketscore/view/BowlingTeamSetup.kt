@@ -11,11 +11,9 @@ import au.edu.utas.kaimol.cricketscore.adapter.PlayerContainerAdapter
 import au.edu.utas.kaimol.cricketscore.controller.TeamSetupController
 import au.edu.utas.kaimol.cricketscore.databinding.ActivityBowlingTeamSetupBinding
 import au.edu.utas.kaimol.cricketscore.entity.Match
-import au.edu.utas.kaimol.cricketscore.entity.Player
 import au.edu.utas.kaimol.cricketscore.entity.Team
 import au.edu.utas.kaimol.cricketscore.entity.TeamType
 import au.edu.utas.kaimol.cricketscore.validator.EmptySetupValidator
-import java.time.LocalDateTime
 
 private val playerIndexes = mutableListOf(1, 2, 3, 4, 5)
 class BowlingTeamSetup : AppCompatActivity() {

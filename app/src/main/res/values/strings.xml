@@ -71,4 +71,5 @@
     <string name="dead_ball">Dead Ball</string>
     <string name="confirm">Confirm</string>
     <string name="stumping">Stumping</string>
+    <string name="enter_team_name">Enter team name</string>
 </resources>

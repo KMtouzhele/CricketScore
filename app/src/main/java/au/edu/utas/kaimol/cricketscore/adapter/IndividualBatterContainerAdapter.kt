@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import au.edu.utas.kaimol.cricketscore.R
 import au.edu.utas.kaimol.cricketscore.databinding.BatterListItemBinding
 import au.edu.utas.kaimol.cricketscore.entity.Player
 

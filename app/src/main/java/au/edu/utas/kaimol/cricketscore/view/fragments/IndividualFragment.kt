@@ -1,7 +1,6 @@
 package au.edu.utas.kaimol.cricketscore.view.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import au.edu.utas.kaimol.cricketscore.R
 import au.edu.utas.kaimol.cricketscore.adapter.IndividualBatterContainerAdapter
 import au.edu.utas.kaimol.cricketscore.adapter.IndividualBowlerContainerAdapter
 import au.edu.utas.kaimol.cricketscore.database.BallDataSource
@@ -54,7 +52,10 @@ class IndividualFragment : Fragment() {
                         val runsMap = BallDataSource().getTotalRunsByCurrentBatter(matchId)
                         val ballsFacedMap = BallDataSource().getBallsFacedByCurrentBatter(matchId)
                         val batters = runsMap.map { (batter, runs) ->
-                            Player(name = batter, runs = runs, ballsFaced = ballsFacedMap[batter] ?: 0)
+                            Player(name = batter,
+                                runs = runs,
+                                ballsFaced = ballsFacedMap[batter] ?: 0
+                            )
                         }.toMutableList()
                         if (batters.isEmpty()){
                             ui.promptIndividual.text = "Match not started yet."
@@ -75,7 +76,8 @@ class IndividualFragment : Fragment() {
                                 name = bowler,
                                 runsLost = runsLost,
                                 ballsDelivered = ballsDeliveredMap[bowler] ?: 0,
-                                totalWickets = wicketsMap[bowler] ?: 0)
+                                totalWickets = wicketsMap[bowler] ?: 0,
+                            )
                         }.toMutableList()
                         if (bowlers.isEmpty()){
                             ui.promptIndividual.text = "Match not started yet."

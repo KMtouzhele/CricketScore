@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".view.BowlingTeamSetup">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bowlersInfoList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtBowlingTeamName" />
+
     <Button
         android:id="@+id/btnMatchStarts"
         android:layout_width="0dp"
@@ -17,15 +26,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnBack" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/bowlersInfoList"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnBack"
@@ -41,25 +41,24 @@
         android:id="@+id/txtBowlingTeamName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="@string/bowling_team_name"
+        android:hint="@string/enter_team_name"
         android:inputType="text"
-        android:text="Moonlight"
-        app:layout_constraintBottom_toTopOf="@+id/bowlersInfoList"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="60dp"
         android:text="@string/bowling_team"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtBowlingTeamName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -242,7 +242,6 @@ class ScoringController(private val ui: FragmentScoreboardBinding, private val s
             ui.chipBye.id -> { type = ResultType.BYE }
             ui.chipLegByes.id -> { type = ResultType.LEG_BYES }
             ui.chipWide.id -> { type = ResultType.WIDE }
-            ui.chipDeadBall.id -> { type = ResultType.DEAD_BALL }
         }
         return type
     }

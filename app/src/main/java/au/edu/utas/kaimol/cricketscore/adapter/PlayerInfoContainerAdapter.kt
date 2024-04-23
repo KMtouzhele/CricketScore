@@ -1,7 +1,6 @@
 package au.edu.utas.kaimol.cricketscore.adapter
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,11 +12,6 @@ import au.edu.utas.kaimol.cricketscore.database.PlayerDataSource
 import au.edu.utas.kaimol.cricketscore.databinding.PlayerInfoListItemBinding
 import au.edu.utas.kaimol.cricketscore.entity.Player
 import au.edu.utas.kaimol.cricketscore.entity.PlayerStatus
-import au.edu.utas.kaimol.cricketscore.view.MatchHistory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 
 class PlayerInfoContainerAdapter(private var players: MutableList<Player>) : RecyclerView.Adapter<PlayerInfoContainerHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerInfoContainerHolder {
@@ -33,6 +27,7 @@ class PlayerInfoContainerAdapter(private var players: MutableList<Player>) : Rec
         val player = players[position]
         holder.ui.txtInfoPlayerName.text = player.name
         holder.ui.txtInfoTeamType.text = player.teamName
+
         holder.ui.editTxtPlayerName.isGone = true
         holder.ui.btnSave.isVisible = false
         holder.ui.btnDelete.isVisible = canBeDeleted(player)
@@ -72,8 +67,8 @@ class PlayerInfoContainerAdapter(private var players: MutableList<Player>) : Rec
         }
     }
     @SuppressLint("NotifyDataSetChanged")
-    fun updatePlayers(newplayers: MutableList<Player>){
-        players = newplayers
+    fun updatePlayers(newPlayers: MutableList<Player>){
+        players = newPlayers
         notifyDataSetChanged()
     }
 

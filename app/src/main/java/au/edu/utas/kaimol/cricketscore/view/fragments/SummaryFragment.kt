@@ -8,10 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import au.edu.utas.kaimol.cricketscore.R
 import au.edu.utas.kaimol.cricketscore.databinding.FragmentSummaryBinding
-import au.edu.utas.kaimol.cricketscore.view.Scoring
 import au.edu.utas.kaimol.cricketscore.viewModel.FragmentSharedViewModel
 import au.edu.utas.kaimol.cricketscore.viewModel.SpinnerViewModel
 
@@ -52,13 +49,14 @@ class SummaryFragment : Fragment() {
         val overCompleted = sharedViewModel.overCompleted.value.toString()
         val ballsDeliveredInOver = sharedViewModel.ballsDeliveredInOver.value.toString()
         ui.txtCurrentOver.text = "$overCompleted.$ballsDeliveredInOver"
+
         //extras
         ui.txtExtraValue.text = sharedViewModel.totalExtras.value.toString()
 
         //run rate
         val totalBalls = 5 * overCompleted.toInt() + ballsDeliveredInOver.toInt()
-        val runRate = totalRuns.toInt() / (totalBalls / (overCompleted.toInt() + 1 ) ).toFloat()
-        ui.txtRunRateValue.text = runRate.toString()
+        val runRate = totalRuns.toInt() / (totalBalls / (overCompleted.toInt() + 1 ) ).toDouble()
+        ui.txtRunRateValue.text = runRate.toString().format("%.2f")
 
         //Share button
         val sharedText : String = "Sharing a match progress with you \n" +

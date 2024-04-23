@@ -107,24 +107,35 @@ class ScoreboardFragment : Fragment() {
                 ball.result = scoringController.getType()
                 ball.timestamp = Timestamp.now()
 
+                //Add the ball to FireStore
                 scoringController.addBall(ball)
-                if(ball.runs % 2 == 1 && sharedViewModel.ballsDeliveredInOver.value!! < 5 ){
+
+                //When the runs are odd, swap the batters
+                if(ball.runs % 2 == 1){
                     swapSpinner()
                     swapBatters()
                 }
 
+                //When wicket, disable the striker and init his scoreboard
                 if(scoringController.wicketType() != null){
                     refreshBatterSpinner()
                     initCurrentBatter()
                 }
+
+                //Check if the over is completed
                 overCompleted()
+
                 batterAdapter1.notifyDataSetChanged()
                 batterAdapter2.notifyDataSetChanged()
                 bowlerAdapter.notifyDataSetChanged()
+
+                //Switch chips status to non-selected, switch button status to disabled
                 refreshChipSelection()
 
+                //Update the match result to FireStore
                 scoringController.updateMatchResult(ball.matchId!!)
 
+                //Check if the match has ended
                 if(scoringController.isMatchEnd()){
                     createEndMatchDialog()
                 }
@@ -267,7 +278,7 @@ class ScoreboardFragment : Fragment() {
 
     }
     private fun setChipGroupListener(chip: ChipGroup, validator: EmptyScoringValidator){
-        chip.setOnCheckedStateChangeListener() { chipGroup, checkedId ->
+        chip.setOnCheckedStateChangeListener() { chipGroup, _ ->
             if (chipGroup.checkedChipId != View.NO_ID) {
                 when (chipGroup) {
                     ui.chipRuns -> {
@@ -295,9 +306,8 @@ class ScoreboardFragment : Fragment() {
                     }
                 }
             }
-
-        }
             validator.buttonStatusUpdate()
+        }
     }
 
     private fun initViewModelObservations(){

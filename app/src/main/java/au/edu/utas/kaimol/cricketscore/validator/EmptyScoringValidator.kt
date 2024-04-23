@@ -1,12 +1,15 @@
 package au.edu.utas.kaimol.cricketscore.validator
 
+import android.util.Log
 import au.edu.utas.kaimol.cricketscore.databinding.FragmentScoreboardBinding
 
 class EmptyScoringValidator (private val ui: FragmentScoreboardBinding) {
 
     fun buttonStatusUpdate() {
         ui.btnConfirm.isEnabled = isResultSelected() && isPlayerSelected()
-
+        Log.d("EmptyScoringValidator",
+            "isResultSelected: ${isResultSelected()}" +
+                    "isPlayerSelected: ${isPlayerSelected()}")
     }
 
     private fun isResultSelected(): Boolean{

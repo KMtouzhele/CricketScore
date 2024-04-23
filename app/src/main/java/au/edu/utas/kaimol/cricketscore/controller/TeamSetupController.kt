@@ -1,9 +1,12 @@
 package au.edu.utas.kaimol.cricketscore.controller
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.Toast
+import androidx.core.graphics.drawable.toBitmap
 import androidx.viewbinding.ViewBinding
+import au.edu.utas.kaimol.cricketscore.R
 import au.edu.utas.kaimol.cricketscore.adapter.TeamSetupAdapter
 import au.edu.utas.kaimol.cricketscore.databinding.ActivityBattingTeamSetupBinding
 import au.edu.utas.kaimol.cricketscore.databinding.ActivityBowlingTeamSetupBinding
@@ -49,11 +52,13 @@ class TeamSetupController() {
         for (i in 0 until viewBinding.battersInfoList.childCount) {
             val childView = viewBinding.battersInfoList.getChildAt(i)
             val playerInfoBinding = PlayersInfoListItemBinding.bind(childView)
+            val drawableId = getDrawableHashCode(playerInfoBinding.imgAvatar.drawable)
             val player = Player(
                 position = i + 1,
                 name = playerInfoBinding.txtPlayerName.text.toString(),
                 teamName = viewBinding.txtBattingTeamName.text.toString(),
-                status = PlayerStatus.AVAILABLE
+                status = PlayerStatus.AVAILABLE,
+                avatar = drawableId
             )
             batters.add(player)
             batters.sortBy { it.position }
@@ -63,5 +68,12 @@ class TeamSetupController() {
 
     fun createValidationToast(context: Context, message: String, duration: Int = Toast.LENGTH_SHORT){
         Toast.makeText(context, message, duration).show()
+    }
+
+    private fun getDrawableHashCode(drawable: Drawable?): Int {
+        return drawable?.let {
+            val bitmap = drawable.toBitmap()
+            bitmap.hashCode()
+        } ?: 0
     }
 }
