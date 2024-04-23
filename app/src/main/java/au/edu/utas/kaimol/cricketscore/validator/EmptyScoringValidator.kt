@@ -6,7 +6,7 @@ import au.edu.utas.kaimol.cricketscore.databinding.FragmentScoreboardBinding
 class EmptyScoringValidator (private val ui: FragmentScoreboardBinding) {
 
     fun buttonStatusUpdate() {
-        ui.btnConfirm.isEnabled = isResultSelected() && isPlayerSelected()
+        ui.btnConfirm.isEnabled = isResultSelected() && isPlayerSelected() && isBattersDifferent()
         Log.d("EmptyScoringValidator",
             "isResultSelected: ${isResultSelected()}" +
                     "isPlayerSelected: ${isPlayerSelected()}")
@@ -28,6 +28,12 @@ class EmptyScoringValidator (private val ui: FragmentScoreboardBinding) {
         val batter2Selected = ui.spinnerBatter2.selectedItemPosition
         val bowlerSelected = ui.spinnerBowler.selectedItemPosition
         return !(batter1Selected == 0 || batter2Selected == 0 || bowlerSelected == 0)
+    }
+
+    private fun isBattersDifferent(): Boolean{
+        val batter1Selected = ui.spinnerBatter1.selectedItemPosition
+        val batter2Selected = ui.spinnerBatter2.selectedItemPosition
+        return batter1Selected != batter2Selected
     }
 
 }

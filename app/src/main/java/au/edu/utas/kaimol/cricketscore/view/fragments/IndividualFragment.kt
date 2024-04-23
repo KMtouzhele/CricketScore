@@ -85,7 +85,6 @@ class IndividualFragment : Fragment() {
                             ui.promptIndividual.text = "${bowlers.size} bowler(s) have played."
                             bowlerAdapter.updateBowlers(bowlers)
                         }
-
                     }
                 }
             }

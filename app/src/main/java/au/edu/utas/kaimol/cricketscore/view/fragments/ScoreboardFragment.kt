@@ -284,7 +284,8 @@ class ScoreboardFragment : Fragment() {
                     ui.chipRuns -> {
                         ui.chipBoundaries.clearCheck()
                         ui.chipWicket.clearCheck()
-                        ui.chipExtras.clearCheck()
+                        ui.chipNoBall.isChecked = false
+                        ui.chipWide.isChecked = false
                     }
 
                     ui.chipBoundaries -> {
@@ -300,9 +301,15 @@ class ScoreboardFragment : Fragment() {
                     }
 
                     ui.chipExtras -> {
-                        ui.chipRuns.clearCheck()
-                        ui.chipBoundaries.clearCheck()
-                        ui.chipWicket.clearCheck()
+                        if (ui.chipNoBall.isChecked || ui.chipWide.isChecked) {
+                            ui.chipRuns.clearCheck()
+                            ui.chipBoundaries.clearCheck()
+                            ui.chipWicket.clearCheck()
+                        } else {
+                            ui.chipBoundaries.clearCheck()
+                            ui.chipWicket.clearCheck()
+                        }
+
                     }
                 }
             }
