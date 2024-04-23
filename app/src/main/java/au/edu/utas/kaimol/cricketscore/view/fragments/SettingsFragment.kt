@@ -11,7 +11,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
-import au.edu.utas.kaimol.cricketscore.R
 import au.edu.utas.kaimol.cricketscore.adapter.PlayerInfoContainerAdapter
 import au.edu.utas.kaimol.cricketscore.database.PlayerDataSource
 import au.edu.utas.kaimol.cricketscore.databinding.FragmentSettingsBinding

@@ -2,11 +2,8 @@ package au.edu.utas.kaimol.cricketscore.controller
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.view.View
 import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
-import androidx.viewbinding.ViewBinding
-import au.edu.utas.kaimol.cricketscore.R
 import au.edu.utas.kaimol.cricketscore.adapter.TeamSetupAdapter
 import au.edu.utas.kaimol.cricketscore.databinding.ActivityBattingTeamSetupBinding
 import au.edu.utas.kaimol.cricketscore.databinding.ActivityBowlingTeamSetupBinding

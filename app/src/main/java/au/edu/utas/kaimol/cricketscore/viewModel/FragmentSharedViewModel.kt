@@ -2,7 +2,6 @@ package au.edu.utas.kaimol.cricketscore.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import au.edu.utas.kaimol.cricketscore.entity.Player
 
 class FragmentSharedViewModel : ViewModel(){
     val runsBatter1: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }

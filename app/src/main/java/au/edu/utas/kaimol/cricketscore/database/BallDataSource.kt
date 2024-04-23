@@ -2,10 +2,8 @@ package au.edu.utas.kaimol.cricketscore.database
 
 import android.util.Log
 import au.edu.utas.kaimol.cricketscore.entity.Ball
-import au.edu.utas.kaimol.cricketscore.entity.Match
 import au.edu.utas.kaimol.cricketscore.entity.ResultType
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
