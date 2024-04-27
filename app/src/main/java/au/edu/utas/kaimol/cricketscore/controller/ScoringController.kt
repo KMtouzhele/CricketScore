@@ -172,6 +172,7 @@ class ScoringController(private val ui: FragmentScoreboardBinding, private val s
     private fun getRunRuns(): Int{
         var runs: Int = 0
         when(ui.chipRuns.checkedChipId){
+            ui.chip0Runs.id -> { runs = 0 }
             ui.chip1Runs.id -> { runs = 1 }
             ui.chip2Runs.id -> { runs = 2 }
             ui.chip3Runs.id -> { runs = 3 }

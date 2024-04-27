@@ -31,6 +31,22 @@ class Scoring : AppCompatActivity() {
         val matchId = intent.getStringExtra("matchId")
         Log.d("Scoring", "Match ID: $matchId")
 
+        val batter1Photo = intent.getStringExtra("batterPhoto1")
+        val batter2Photo = intent.getStringExtra("batterPhoto2")
+        val batter3Photo = intent.getStringExtra("batterPhoto3")
+        val batter4Photo = intent.getStringExtra("batterPhoto4")
+        val batter5Photo = intent.getStringExtra("batterPhoto5")
+        Log.d("Scoring", "Batter1Photo: $batter1Photo")
+        Log.d("Scoring", "Batter2Photo: $batter2Photo")
+        Log.d("Scoring", "Batter3Photo: $batter3Photo")
+        Log.d("Scoring", "Batter4Photo: $batter4Photo")
+        Log.d("Scoring", "Batter5Photo: $batter5Photo")
+
+        val bowler6Photo = intent.getStringExtra("bowlerPhoto6")
+        val bowler7Photo = intent.getStringExtra("bowlerPhoto7")
+        val bowler8Photo = intent.getStringExtra("bowlerPhoto8")
+        val bowler9Photo = intent.getStringExtra("bowlerPhoto9")
+        val bowler10Photo = intent.getStringExtra("bowlerPhoto10")
 
         //The initial fragment should be scoreboard
         replaceFragment(ScoreboardFragment())

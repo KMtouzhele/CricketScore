@@ -49,13 +49,11 @@ class TeamSetupController() {
         for (i in 0 until viewBinding.battersInfoList.childCount) {
             val childView = viewBinding.battersInfoList.getChildAt(i)
             val playerInfoBinding = PlayersInfoListItemBinding.bind(childView)
-            val drawableId = getDrawableHashCode(playerInfoBinding.imgAvatar.drawable)
             val player = Player(
                 position = i + 1,
                 name = playerInfoBinding.txtPlayerName.text.toString(),
                 teamName = viewBinding.txtBattingTeamName.text.toString(),
                 status = PlayerStatus.AVAILABLE,
-                avatar = drawableId
             )
             batters.add(player)
             batters.sortBy { it.position }
